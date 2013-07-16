@@ -1,0 +1,10 @@
+{% if cruises %}
+  <table>
+    {% for cruise in cruises %}
+      <tr>
+        {% for param in parameters %}
+          <td> {{param.name}}</td>
+          {% endfor %}
+        </tr>
+  {% endfor %}
+{% endif %}
