@@ -1,0 +1,88 @@
+{% load cms_tags sekizai_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <!--
+        We aren't using any responsive design stuff yet
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        -->
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        {% load staticfiles %}
+        <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/screen.css' %}">
+        {% render_block "css" %}
+        <link href='http://fonts.googleapis.com/css?family=Muli:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
+        <title>Home | U.S. Repeat Hydrography </title>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="container text-center">
+          <a href="index.html"><img class="biglogo" src="{% static 'img/ushydro_logo.png' %}" alt=""></a>
+        </div>
+        <div class="container" style="width:100%; height:50px">
+          <div class="navbar" >
+                  <div class="navbar-inner">
+                    <div class="container">
+                      <a href="index.html"><img src="{% static 'img/icon.png' %}" alt="" class="sticker icon"></a>
+                    <ul class="nav ">
+                        <li class="active"><a href="/">HOME</a></li>
+                        <li><a href="cruisedata.html">CRUISE DATA</a></li>
+                        <li><a href="datapolicy.html">DATA POLICY</a></li>
+                        <li><a href="/outreach">OUTREACH</a></li>
+                        <li><a href="links.html">LINKS</a></li>
+                        <li><a href="about.html">ABOUT</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+        </div>
+    {% cms_toolbar %}
+    {% placeholder base_content %}
+    {% block base_content %}{% endblock %}
+        <div class="footer">
+            <div class="container">
+                <ul>
+                    <li class="active"><a href="/">HOME</a></li>
+                    <li><a href="cruisedata.html">CRUISE DATA</a></li>
+                    <li><a href="datapolicy.html">DATA POLICY</a></li>
+                    <li><a href="/outreach">OUTREACH</a></li>
+                    <li><a href="links.html">LINKS</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                </ul>
+                <div class="funding"></div>
+            </div>
+        </div>
+
+    {% render_block "js" %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+          <script src="{% static 'js/plugins.js' %}"></script>
+          <script src="{% static 'js/bootstrap.min.js' %}"></script>
+          <script src="{% static 'js/main.js' %}"></script>
+
+        <!-- Google Analytics -->
+        <script>
+            var _gaq=[['_setAccount','UA-2167386-12'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
