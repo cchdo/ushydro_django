@@ -53,9 +53,14 @@
               </div>
             </div>
         </div>
+        <div class="container">
     {% cms_toolbar %}
+    {% block hydrotable %}{% endblock %}
+
     {% placeholder base_content %}
+    <!-- Base content -->
     {% block base_content %}{% endblock %}
+  </div>
         <div class="footer">
             <div class="container">
                 <ul>

@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 # Create your models here.
@@ -7,11 +9,63 @@ class Cruise(models.Model):
     end_date = models.DateField()
     expocode = models.CharField(max_length=100)
     stations = models.IntegerField()
+    start_port = models.CharField(max_length=100)
+    end_port = models.CharField(max_length=100)
     chief_scientist = models.CharField(max_length=200)
+    ship = models.CharField(max_length=200)
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.expocode)
-    
+
+    def _sterile(self):
+        if self.end_date > date.today():
+            return True
+        else:
+            return False
+
+    @property
+    def safe_start_date(self):
+        if self._sterile() is True:
+            return self.start_date.strftime("%Y")
+        else:
+            return self.start_date.strftime("%Y-%m-%d")
+
+    @property
+    def safe_end_date(self):
+        if self._sterile() is True:
+            return self.end_date.strftime("%Y")
+        else:
+            return self.end_date.strftime("%Y-%m-%d")
+
+    @property
+    def safe_expocode(self):
+        if self._sterile() is True:
+            return "-"
+        else:
+            return self.expocode
+
+    @property
+    def safe_start_port(self):
+        if self._sterile() is True:
+            return "CLASSIFIED"
+        else:
+            return self.start_port
+
+    @property
+    def safe_end_port(self):
+        if self._sterile() is True:
+            return "CLASSIFIED"
+        else:
+            return self.end_port
+
+    @property
+    def safe_days(self):
+        td = self.end_date - self.start_date
+        if self._sterile() is True:
+            return "-"
+        else:
+            return td.days
+
 
 class Parameter(models.Model):
     name = models.CharField(max_length=100)
@@ -20,8 +74,30 @@ class Parameter(models.Model):
         return self.name
 
 
-class Cell(models.Model):
+class Institution(models.Model):
+    name = models.CharField(max_length=200)
+    abrev = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return self.name
+
+
+class PI(models.Model):
+    name = models.CharField(max_length=200)
+    institution = models.ForeignKey(Institution)
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.name, self.institution.abrev)
+    
+
+class Program(models.Model):
     cruise = models.ForeignKey(Cruise)
     parameter = models.ForeignKey(Parameter)
-    value = models.CharField(max_length=200)
-    url = models.URLField()
+    pi = models.ForeignKey(PI)
+    url = models.URLField(blank=True, null=True)
+
+    def save(self):
+        if self.url == "":
+            self.url = None
+
+        super(Program, self).save()

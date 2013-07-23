@@ -1,10 +1,43 @@
+{% extends "base.html" %}
+{% load helpers %}
+{% block hydrotable %}
 {% if cruises %}
   <table>
-    {% for cruise in cruises %}
-      <tr>
+    <tr>
+      <th>Cruise</th>
+      <th>Dates</th>
+      <th>Expocode</th>
+      <th>Ship</th>
+      <th>Days</th>
+      <th>Stations</th>
+      <th>Ports</th>
+      <th>Chief Scientist</th>
         {% for param in parameters %}
-          <td> {{param.name}}</td>
+          <th> {{param.name}}</th>
           {% endfor %}
-        </tr>
+      </tr>
+  {% for cruise in cruises %}
+    <tr>
+      <td>{{ cruise.name }}</td>
+      <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
+      <td>{{ cruise.safe_expocode }}</td>
+      <td>{{ cruise.ship }}</td>
+      <td>{{ cruise.safe_days }}</td>
+      <td>{{ cruise.stations }}</td>
+      <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
+      <td>{{ cruise.chief_scientist }}</td>
+
+        {% for param in parameters %}
+        <td>
+          {% for program in cruises|hash:cruise %}
+          {% if program.parameter == param %}
+          {{ program.pi.name }}
+          {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </td>
+    </tr>
   {% endfor %}
+</table>
 {% endif %}
+{% endblock %}
