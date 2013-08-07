@@ -14,6 +14,13 @@ class Cruise(models.Model):
     chief_scientist = models.CharField(max_length=200)
     ship = models.CharField(max_length=200)
 
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.start_date > self.end_date:
+            raise ValidationError("The cruise cannot end before it has even "
+            "started")
+
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.expocode)
 
@@ -26,14 +33,14 @@ class Cruise(models.Model):
     @property
     def safe_start_date(self):
         if self._sterile() is True:
-            return self.start_date.strftime("%Y")
+            return self.start_date.strftime("%Y-%B")
         else:
             return self.start_date.strftime("%Y-%m-%d")
 
     @property
     def safe_end_date(self):
         if self._sterile() is True:
-            return self.end_date.strftime("%Y")
+            return self.end_date.strftime("%Y-%B")
         else:
             return self.end_date.strftime("%Y-%m-%d")
 
