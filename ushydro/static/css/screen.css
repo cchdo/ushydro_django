@@ -458,7 +458,7 @@ ol {
 .navbar .icon{
   //float: left;
 }
-.navbar .nav li a {
+.navbar-nav>li>a {
     float: none;
     padding: 10px 15px 12px;
     color: white;
@@ -474,7 +474,7 @@ ol {
     -o-transition: background .2s ease, color 0.1s linear;
     transition: background .2s ease, color 0.1s linear;
 }
-.navbar .nav .active a, .navbar .nav .active a:hover, .navbar .nav .active a:focus {
+.navbar .nav .selected a, .navbar .nav .selected a:hover, .navbar .nav .selected a:focus {
     color: white;
     text-decoration: none;
     background: none;
@@ -483,8 +483,8 @@ ol {
     -moz-box-shadow: none;
     box-shadow: none;
 }
-.navbar .nav>li>a{
-    font-size: 12px;
+.navbar-nav>li>a{
+    font-size: 1.1em;
     line-height: 28px;
 }
 
@@ -986,12 +986,20 @@ h4 {
     text-transform: uppercase;
 }
 
+#datatable {
+  white-space: nowrap;
+}
+
+#datatable_wrapper * {
+  box-sizing: content-box;
+}
 
 #datatable_wrapper table{
   white-space: nowrap;
 }
 #datatable_wrapper th{
   padding:10px;
+  padding-right: 20px
 }
 #datatable_wrapper td{
   padding:10px;
