@@ -30,15 +30,9 @@
       <td>{{ cruise.stations }}</td>
       <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
       <td>{{ cruise.chief_scientist }}</td>
-
       {% for param in parameters %}
       <td>
-        {% for program in cruises|hash:cruise %}
-        {% if program.parameter == param %}
-        {{ program.pi.name }}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
+        {% for program in cruises|hash:cruise %}{% if program.parameter == param %}{{ program.pi.name }}{% endif %}{% endfor %}{% endfor %}
       </td>
     </tr>
     {% endfor %}
@@ -48,15 +42,14 @@
 {% endblock %}
 {% block js %}
 {% addtoblock "js" %}
-<script src="/static/js/jquery.dataTables.js" ></script>
-<script src="/static/js/dataTables.bootstrap.js" ></script>
-<script src="/static/js/FixedColumns.js" ></script>
-<script src="/static/js/ColReorder.js" ></script>
+<script src="/static/hydrotable/js/jquery.dataTables.js" ></script>
+<script src="/static/hydrotable/js/dataTables.bootstrap.js" ></script>
+<script src="/static/hydrotable/js/FixedColumns.js" ></script>
 <script>
   var mtable;
   $(window).load( function () {
     var oTable = $('#datatable').dataTable( {
-      "sScrollX": "940px",
+      "sScrollX": "100%",
       "bScrollCollapse": true,
       "aaSorting": [[ 1, "desc" ]],
     } );
@@ -67,7 +60,7 @@
 {% endblock %}
 {% block css %}
 {% addtoblock "css" %}
-<link href="/static/css/dataTables.bootstrap.css" rel="stylesheet" >
-<link href="/static/css/demo_table.css" rel="stylesheet" >
+<link href="/static/hydrotable/css/dataTables.bootstrap.css" rel="stylesheet" >
+<link href="/static/hydrotable/css/demo_table.css" rel="stylesheet" >
 {% endaddtoblock %}
 {% endblock %}
