@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.db import models
+from ordered_model.models import OrderedModel
 
 # Create your models here.
 class Cruise(models.Model):
@@ -73,8 +74,16 @@ class Cruise(models.Model):
         else:
             return td.days
 
+    @property
+    def programs(self):
+        return self.program_set.all()
 
-class Parameter(models.Model):
+    @property
+    def parameters(self):
+        return [p.parameter for p in self.programs]
+
+
+class Parameter(OrderedModel):
     name = models.CharField(max_length=100)
     
     def __unicode__(self):
