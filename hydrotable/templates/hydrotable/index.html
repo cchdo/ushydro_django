@@ -32,7 +32,16 @@
       <td>{{ cruise.chief_scientist }}</td>
       {% for param in parameters %}
       <td>
-        {% for program in cruises|hash:cruise %}{% if program.parameter == param %}{{ program.pi.name }}{% endif %}{% endfor %}{% endfor %}
+        {% if param in cruise.parameters %}
+        {% for program in cruise.programs %}
+        {% if program.parameter == param %}
+        {{ program.pi.name }}
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        -
+        {% endif %}
+        {% endfor %}
       </td>
     </tr>
     {% endfor %}
