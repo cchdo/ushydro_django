@@ -950,7 +950,7 @@ a>.orange, .orange .title{
     -o-transition: background .2s ease, color 0.1s linear;
     transition: background .2s ease, color 0.1s linear;
 }
-.footer .active a, .footer .active a:hover, .footer .active a:focus, .footer li a:hover {
+.footer .selected a, .footer .selected a:hover, .footer .selected a:focus, .footer li a:hover {
     color: #000080; /*dark blue*/
     text-decoration: none;
     background: none;
