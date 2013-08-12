@@ -138,10 +138,6 @@ TEMPLATE_DIRS = (
         os.path.join(PROJECT_PATH, "templates"),
         )
 
-CMS_TEMPLATES = (
-        ('home_page.html', 'Home Page'),
-        ('template_2.html', 'Template Two'),
-        )
 
 INSTALLED_APPS = (
         'django.contrib.auth',
@@ -209,4 +205,50 @@ LOGGING = {
                 'propagate': True,
                 },
             }
+        }
+
+### CMS Config Stuff Here
+CMS_PERMISSION = True
+
+CMS_TEMPLATES = (
+        ('home_page.html', 'Home Page'),
+        ('template_2.html', 'Template Two'),
+        )
+
+CMS_PLACEHOLDER_CONF = {
+        'home_page.html left_main_image':{
+            'plugins': ('FilerImagePlugin',),
+            'name': 'Main Left Image',
+            'limits': {
+                'global': 1,
+                },
+            },
+        'home_page.html right_upper_left':{
+            'plugins': ('FilerImagePlugin',),
+            'name': 'Right Upper Left Image',
+            'limits': {
+                'global': 1,
+                },
+            },
+        'home_page.html right_upper_right':{
+            'plugins': ('FilerImagePlugin',),
+            'name': 'Right Upper Right Image',
+            'limits': {
+                'global': 1,
+                },
+            },
+        'home_page.html right_lower_left':{
+            'plugins': ('FilerImagePlugin',),
+            'name': 'Right Lower Left Image',
+            'limits': {
+                'global': 1,
+                },
+            },
+        'home_page.html right_lower_right':{
+            'plugins': ('FilerImagePlugin',),
+            'name': 'Right Lower Right Image',
+            'limits': {
+                'global': 1,
+                },
+            },
         }
