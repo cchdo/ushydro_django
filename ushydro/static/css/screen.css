@@ -584,6 +584,7 @@ h4 {
     text-align: center;
     font-size: 1.5em;
     color: white;
+    white-space: nowrap;
 }
 a>.blue, .blue .title{
     background-color: #0fbef4; /*bright blue from logo*/

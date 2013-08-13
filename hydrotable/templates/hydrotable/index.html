@@ -25,7 +25,7 @@
       <td>{{ cruise.name }}</td>
       <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
       <td>{% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</td>
-      <td>{{ cruise.ship }}</td>
+      <td>{% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
       <td>{{ cruise.safe_days }}</td>
       <td>{{ cruise.stations }}</td>
       <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
