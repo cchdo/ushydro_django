@@ -4,6 +4,13 @@ from django.db import models
 from ordered_model.models import OrderedModel
 
 # Create your models here.
+class Ship(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.URLField(blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
+
 class Cruise(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField()
@@ -13,7 +20,8 @@ class Cruise(models.Model):
     start_port = models.CharField(max_length=100)
     end_port = models.CharField(max_length=100)
     chief_scientist = models.CharField(max_length=200)
-    ship = models.CharField(max_length=200)
+    ship = models.ForeignKey(Ship)
+    expocode_link = models.URLField(blank=True, null=True)
 
 
     def clean(self):

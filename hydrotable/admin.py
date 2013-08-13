@@ -1,5 +1,5 @@
 from django.contrib import admin
-from hydrotable.models import Cruise, Program, Parameter, PI, Institution
+from hydrotable.models import Cruise, Program, Parameter, PI, Institution, Ship
 from ordered_model.admin import OrderedModelAdmin
 
 class ProgramInline(admin.TabularInline):
@@ -16,3 +16,4 @@ admin.site.register(Cruise, CruiseAdmin)
 admin.site.register(Parameter, ParameterAdmin)
 admin.site.register(PI)
 admin.site.register(Institution)
+admin.site.register(Ship)

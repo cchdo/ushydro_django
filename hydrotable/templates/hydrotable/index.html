@@ -8,7 +8,7 @@
     <tr>
       <th>Cruise</th>
       <th>Dates</th>
-      <th>Expocode</th>
+      <th>Expocode<br/>(CTD, Bottle Data)</th>
       <th>Ship</th>
       <th>Days</th>
       <th>Stations</th>
@@ -24,7 +24,7 @@
     <tr>
       <td>{{ cruise.name }}</td>
       <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
-      <td>{{ cruise.safe_expocode }}</td>
+      <td>{% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</td>
       <td>{{ cruise.ship }}</td>
       <td>{{ cruise.safe_days }}</td>
       <td>{{ cruise.stations }}</td>
@@ -35,7 +35,13 @@
         {% if param in cruise.parameters %}
         {% for program in cruise.programs %}
         {% if program.parameter == param %}
+        {% if program.url %}
+        <a href="{{program.url}}">
+          {% endif %}
         {{ program.pi.name }}
+        {% if program.url %}
+    </a>
+    {% endif %}
         {% endif %}
         {% endfor %}
         {% else %}
