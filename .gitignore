@@ -1,0 +1,14 @@
+.DS_Store
+*.log
+*.pid
+tmp/**/*
+doc
+db/*.sqlite3
+# Prevent adding virtual_cruise (videos) to repository
+public/virtual_cruise*
+# Prevent recursing the project inside itself. Has happened!
+# ^--- wow, well the django project is now called ushydro so we need to be able to add it
+#ushydro
+# Editors
+*.swp
+*.swo
