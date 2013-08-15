@@ -29,12 +29,14 @@
       <td>{{ cruise.safe_days }}</td>
       <td>{{ cruise.stations }}</td>
       <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
-      <td>{{ cruise.chief_scientist }}</td>
+      <td>{{ cruise.chief_scientists }}</td>
       {% for param in parameters %}
       <td>
+        <ul>
         {% if param in cruise.parameters %}
         {% for program in cruise.programs %}
         {% if program.parameter == param %}
+        <li>
         {% if program.url %}
         <a href="{{program.url}}">
           {% endif %}
@@ -42,8 +44,10 @@
         {% if program.url %}
     </a>
     {% endif %}
+        </li>
         {% endif %}
         {% endfor %}
+  </ul>
         {% else %}
         -
         {% endif %}

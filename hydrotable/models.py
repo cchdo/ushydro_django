@@ -10,6 +10,23 @@ class Ship(models.Model):
 
     def __unicode__(self):
         return self.name
+    
+
+class Institution(models.Model):
+    name = models.CharField(max_length=200)
+    abrev = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return self.name
+
+
+class PI(models.Model):
+    name = models.CharField(max_length=200)
+    institution = models.ForeignKey(Institution)
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.name, self.institution.abrev)
+
 
 class Cruise(models.Model):
     name = models.CharField(max_length=100)
@@ -19,7 +36,7 @@ class Cruise(models.Model):
     stations = models.IntegerField()
     start_port = models.CharField(max_length=100)
     end_port = models.CharField(max_length=100)
-    chief_scientist = models.CharField(max_length=200)
+    chief_scientist = models.ManyToManyField(PI)
     ship = models.ForeignKey(Ship)
     expocode_link = models.URLField(blank=True, null=True)
 
@@ -38,6 +55,13 @@ class Cruise(models.Model):
             return True
         else:
             return False
+
+    @property
+    def chief_scientists(self):
+        l = []
+        for cs in self.chief_scientist.all():
+            l.append(cs.__unicode__())
+        return ', '.join(l)
 
     @property
     def safe_start_date(self):
@@ -96,22 +120,6 @@ class Parameter(OrderedModel):
     
     def __unicode__(self):
         return self.name
-
-
-class Institution(models.Model):
-    name = models.CharField(max_length=200)
-    abrev = models.CharField(max_length=20)
-
-    def __unicode__(self):
-        return self.name
-
-
-class PI(models.Model):
-    name = models.CharField(max_length=200)
-    institution = models.ForeignKey(Institution)
-
-    def __unicode__(self):
-        return "%s (%s)" % (self.name, self.institution.abrev)
     
 
 class Program(models.Model):
@@ -119,6 +127,7 @@ class Program(models.Model):
     parameter = models.ForeignKey(Parameter)
     pi = models.ForeignKey(PI)
     url = models.URLField(blank=True, null=True)
+    is_data = models.BooleanField(default=False)
 
     def save(self):
         if self.url == "":

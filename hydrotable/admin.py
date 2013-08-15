@@ -6,8 +6,19 @@ class ProgramInline(admin.TabularInline):
     model = Program
     extra = 0
 
+class CSInline(admin.TabularInline):
+    model = Cruise.chief_scientist.through
+    extra = 1
+    verbose_name = "Chief Scientist"
+    verbose_name_plural = "Chief Scientists"
+    
+
 class CruiseAdmin(admin.ModelAdmin):
-    inlines = [ProgramInline]
+    inlines = [
+            CSInline,
+            ProgramInline,
+            ]
+    exclude = ('chief_scientist',)
 
 class ParameterAdmin(OrderedModelAdmin):
     list_display = ('name', 'move_up_down_links')

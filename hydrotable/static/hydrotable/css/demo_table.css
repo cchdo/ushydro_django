@@ -36,6 +36,10 @@
 	zoom: 1; /* Feeling sorry for IE */
 }
 
+.dataTables_wrapper ul{
+  margin-bottom: 0;
+}
+
 .dataTables_processing {
 	position: absolute;
 	top: 50%;
