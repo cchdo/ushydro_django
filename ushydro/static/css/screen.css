@@ -995,21 +995,3 @@ a>.orange, .orange .title{
     text-transform: uppercase;
 }
 
-#datatable {
-  white-space: nowrap;
-}
-
-#datatable_wrapper * {
-  box-sizing: content-box;
-}
-
-#datatable_wrapper table{
-  white-space: nowrap;
-}
-#datatable_wrapper th{
-  padding:10px;
-  padding-right: 20px
-}
-#datatable_wrapper td{
-  padding:10px;
-}
