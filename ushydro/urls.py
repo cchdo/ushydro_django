@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
+#from django.template import add_to_builtins
+#add_to_builtins('smart_load_tag.templatetags.smart_load')
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -17,6 +19,7 @@ urlpatterns = patterns('',
        # url(r'^hydrotable/', include('hydrotable.urls')),
         url(r'^admin/', include(admin.site.urls)),
         url(r'^', include('cms.urls')),
+        url(r'^', include('cms.urls', namespace='imagestore')),
         )
 
 if settings.DEBUG:
