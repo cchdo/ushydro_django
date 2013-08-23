@@ -18,8 +18,6 @@ def _get_json():
     for i, doc_id in enumerate(response['document_ids']):
         response = mendeley.group_doc_details(groupId, doc_id)
         all_documents.append(response)
-        if i > 20:
-            break
 
     def sort(first, second=None, reverse=False):
         """Sort group documents.
