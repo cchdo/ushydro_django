@@ -16,10 +16,11 @@ urlpatterns = patterns('',
         # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
         # Uncomment the next line to enable the admin:
+        #url(r'^bibliography/', include('bibliography.urls')),
        # url(r'^hydrotable/', include('hydrotable.urls')),
         url(r'^admin/', include(admin.site.urls)),
-        url(r'^', include('cms.urls')),
-        url(r'^', include('cms.urls', namespace='imagestore')),
+        (r'^', include('cms.urls')),
+        (r'^', include('cms.urls', namespace='imagestore')),
         )
 
 if settings.DEBUG:
