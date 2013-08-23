@@ -13,8 +13,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': '/Users/abarna/work/websites/ushydro/test_db.sqlite3',                      # Or path to database file if using sqlite3.
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'ushydro_django',                      # Or path to database file if using sqlite3.
             # The following settings are not used with sqlite3:
             'USER': '',
             'PASSWORD': '',
@@ -151,20 +151,26 @@ INSTALLED_APPS = (
         # Uncomment the next line to enable admin documentation:
         # 'django.contrib.admindocs',
         'hydrotable',
+        'bibliography',
+        'smart_load_tag',
         'cms',
         'mptt',
         'menus',
         'south',
         'sekizai',
         'cms.plugins.text',
+        'cms.plugins.link',
         'filer',
         'easy_thumbnails',
         'cmsplugin_filer_image',
-        'cmsplugin_blog',
+        #'cmsplugin_blog',
         'djangocms_utils',
         'simple_translation',
         'tagging',
         'missing',
+        'sorl.thumbnail',
+        'imagestore',
+        'imagestore.imagestore_cms',
         )
 
 JQUERY_JS = 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'
@@ -252,3 +258,6 @@ CMS_PLACEHOLDER_CONF = {
                 },
             },
         }
+
+IMAGESTORE_SHOW_USER = False
+THUMBNAIL_DEBUG = True

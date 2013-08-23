@@ -56,12 +56,12 @@
             </div>
 
         <div class="container">
+    {% block hydrotable %}{% endblock %}
+    {% block bibliography %}{% endblock %}
     {% cms_toolbar %}
     {% spaceless %}
-    {% block hydrotable %}{% endblock %}
     {% endspaceless %}
 
-    {% placeholder base_content %}
     <!-- Base content -->
     {% block base_content %}{% endblock %}
   </div>

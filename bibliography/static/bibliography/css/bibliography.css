@@ -1,0 +1,67 @@
+.exhibit-tileView-body {
+  list-style-type: none;
+  margin-left: 0;
+}
+.exhibit-collectionSummaryWidget-count {   /* # of results */
+  color: #FFA300; /*orange*/
+  display:block;
+}
+div.exhibit-collectionView-header { 
+  margin-bottom: 1em;
+}
+div.exhibit-collectionView-header-sortControls {  /* sorted by menu links */
+  float: right;
+  margin: -2em 3em 1em 0;
+}
+/*Sorted by menu*/
+div.exhibit-ui-protection{
+  padding: 0;
+}
+div.exhibit-menu-popup {
+  background-color: #EAF8FD; /*light blue*/
+  padding: 1em;
+  border: none;
+  -webkit-box-shadow: 0 1px 4px rgba(122, 122, 122, 0.46);
+  -moz-box-shadow: 0 1px 4px rgba(122, 122, 122, 0.46);
+  box-shadow: 0 1px 4px rgba(122, 122, 122, 0.46);
+}  
+/* bibliography */
+div.bibliography {
+  padding-bottom: 1.5em;
+}
+div.biblio_content {
+  margin: 0 0 1em 1em;
+}
+/*label*/
+div.title {
+  background-color: #F3FCFF; /*light blue*/
+  text-shadow: none;
+  color: #333333;
+  font-size: 1.1em;
+  padding: 1em;
+  width: 100%;
+  margin-bottom: .5em;
+}
+.exhibit-ui-protection {
+  padding: 1em .5em 1em .5em;
+}
+/* publisher */
+div.publisher {
+  display: block;
+  float: left;
+  padding-right: .5em;
+  font-style: italic;
+}
+/* year */
+.year {
+  display: block;
+  float:left;
+}
+.parenthesis {
+  display: block;
+  float:left;
+}
+h4 {
+  color: #467eb2;/*dark blue*/
+  text-align: center;
+}
