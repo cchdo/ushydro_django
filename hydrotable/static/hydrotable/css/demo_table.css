@@ -37,19 +37,27 @@
   width: 10px;
   background-image: url("/static/hydrotable/images/fade_gradient.png");
 }
-.rightarrow{
-  background-image: url("/static/hydrotable/images/Chevron_right_font_awesome.svg.png");
+.arrowhide{
   background-repeat:no-repeat;
   background-position: center center;
   background-size: contain;
   position: absolute;
-  left: 100%;
   top: 0;
   bottom: 0;
   width: 20px;
   background-color: #eee;
 }
-.rightarrow:hover{
+.rightarrow{
+  background-image: url("/static/hydrotable/images/Chevron_right_font_awesome.svg.png");
+  left: 100%;
+  background-color: #eee;
+}
+.leftarrow{
+  background-image: url("/static/hydrotable/images/Chevron_left_font_awesome.svg.png");
+  right: 100%;
+  background-color: #eee;
+}
+.arrowhide:hover{
   background-color: #ddd;
 }
 

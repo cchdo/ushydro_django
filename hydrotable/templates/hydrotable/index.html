@@ -77,13 +77,31 @@
     new FixedColumns( oTable);
 
     $('.DTFC_ScrollWrapper').append('<div class="rightgradient"></div>');
-    $('.DTFC_ScrollWrapper').append('<div class="rightarrow"></div>');
+    $('.DTFC_LeftWrapper').append('<div class="leftarrow arrowhide"></div>');
+    $('.DTFC_ScrollWrapper').append('<div class="rightarrow arrowhide"></div>');
     $('.rightarrow').click(function(){
-      s = $('.dataTables_scrollBody').scrollLeft();
-      $('.dataTables_scrollBody').animate({
-        scrollLeft: s + 200
+      e = $('.dataTables_scrollBody')
+      s = e.scrollLeft();
+      w = e.width()/2
+      e.animate({
+        scrollLeft: s + w
       }, 250);
+    });
+    $('.leftarrow').click(function(){
+      e = $('.dataTables_scrollBody')
+      s = e.scrollLeft();
+      w = e.width()/2
+      e.animate({
+        scrollLeft: s - w
+      }, 250);
+    });
 
+    $(window).resize(function() {
+      if ($(window).width() < 768) {
+        $('.arrowhide').hide();
+      } else {
+        $('.arrowhide').show();
+      }
     });
   } );
 </script>
