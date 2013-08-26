@@ -3,6 +3,7 @@
 {% load sekizai_tags %}
 {% block hydrotable %}
 {% if cruises %}
+<div class="container">
 <table id="datatable" >
   <thead>
     <tr>
@@ -57,6 +58,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 {% endif %}
 {% endblock %}
 {% block js %}
@@ -73,6 +75,16 @@
       "aaSorting": [[ 1, "desc" ]],
     } );
     new FixedColumns( oTable);
+
+    $('.DTFC_ScrollWrapper').append('<div class="rightgradient"></div>');
+    $('.DTFC_ScrollWrapper').append('<div class="rightarrow"></div>');
+    $('.rightarrow').click(function(){
+      s = $('.dataTables_scrollBody').scrollLeft();
+      $('.dataTables_scrollBody').animate({
+        scrollLeft: s + 200
+      }, 250);
+
+    });
   } );
 </script>
 {% endaddtoblock %}

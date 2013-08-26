@@ -29,11 +29,35 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables features
  */
+.rightgradient{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  background-image: url("/static/hydrotable/images/fade_gradient.png");
+}
+.rightarrow{
+  background-image: url("/static/hydrotable/images/Chevron_right_font_awesome.svg.png");
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-size: contain;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background-color: #eee;
+}
+.rightarrow:hover{
+  background-color: #ddd;
+}
 
 #datatable {
   max-width: none;
   width: none;
   white-space: nowrap;
+  border-collapse: separate;
 }
 
 #datatable a{

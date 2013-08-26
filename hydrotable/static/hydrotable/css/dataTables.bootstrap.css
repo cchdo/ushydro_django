@@ -178,7 +178,7 @@ div.DTFC_LeftHeadWrapper table thead tr:last-child td:first-child {
 div.DTFC_RightBodyWrapper table,
 div.DTFC_LeftBodyWrapper table {
     border-top: none;
-    margin-bottom: 0 !important;
+    //margin-bottom: 0 !important;
 }
  
 div.DTFC_RightBodyWrapper tbody tr:first-child th,
