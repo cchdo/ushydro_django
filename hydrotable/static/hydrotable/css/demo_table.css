@@ -277,11 +277,11 @@ table.display thead td:active {
 
 
 tr.odd {
-	background-color: #AFE1F9;
+	background-color: #C3E8FA;
 }
 
 tr.even, table.DTFC_Cloned tr.even {
-	background-color: #4BABE6;
+	background-color: #EBF7FC;
 }
 
 
