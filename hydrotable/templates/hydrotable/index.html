@@ -4,6 +4,18 @@
 {% block hydrotable %}
 {% if cruises %}
 <div class="container">
+  <div class="row">
+    <div class="col-4">
+  <div class="data_status_key">
+      <h4>Data status color guide</h4>
+    <ul>
+      <li class="not_yet">Sampled, data not received</li>
+      <li class="preliminary">Data received, are non final</li>
+      <li class="final">Final data received</li>
+    </ul>
+  </div>
+</div>
+</div>
 <table id="datatable" >
   <thead>
     <tr>
@@ -37,13 +49,19 @@
         {% if param in cruise.parameters %}
         {% for program in cruise.programs %}
         {% if program.parameter == param %}
-        <li>
+        <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
         {% if program.url %}
         <a href="{{program.url}}">
           {% endif %}
         {{ program.pi.name }}
         {% if program.url %}
     </a>
+    {% endif %}
+    {% if user.is_authenticated %}
+    {% if program.note %}
+    <br/>
+    <span class="program_notes">Notes: {{ program.note }}</span>
+    {% endif %}
     {% endif %}
         </li>
         {% endif %}

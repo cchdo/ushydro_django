@@ -29,6 +29,26 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables features
  */
+#datatable ul, .data_status_key ul{
+  padding: 0px;
+}
+#datatable li{
+  padding: 4px;
+}
+.not_yet{
+  background-color: #FFE3E3;
+}
+.preliminary{
+  background-color: #FFFEE3;
+}
+.final{
+  background-color: #E6FFE3;
+}
+
+.program_notes{
+  font-size: 0.8em;
+}
+
 .rightgradient{
   position: absolute;
   top: 0;

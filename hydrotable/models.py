@@ -129,8 +129,18 @@ class Program(models.Model):
     url = models.URLField(blank=True, null=True)
     is_data = models.BooleanField(default=False)
 
+    status_choices = (
+            (1, "Sampled, Not Recieved"),
+            (2, "Received, Non-final"),
+            (3, "Received, Final"),
+            )
+    data_status = models.IntegerField(choices=status_choices, default=1)
+    note = models.TextField(null=True, blank=True)
+
     def save(self):
         if self.url == "":
             self.url = None
+        if self.note == "":
+            self.note = None
 
         super(Program, self).save()
