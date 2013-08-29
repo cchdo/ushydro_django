@@ -28,7 +28,7 @@
       <th>Ports</th>
       <th>Chief Scientist</th>
       {% for param in parameters %}
-      <th> {{param.name}}</th>
+      <th> {{param.name|safe}}</th>
       {% endfor %}
     </tr>
   </thead>
