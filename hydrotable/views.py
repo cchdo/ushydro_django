@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
 
 from hydrotable.models import Cruise, Parameter
 
+@cache_page(60 * 15)
 def index(request):
     load_cruises = Cruise.objects.all()
     cruises = {}
