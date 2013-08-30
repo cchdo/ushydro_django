@@ -36,7 +36,11 @@
     {% for cruise in cruises %}
     <tr>
       <td>{{ cruise.name }}</td>
+      {% if cruise.is_restricted %}
+      <td>{{ cruise.year }}</td>
+      {% else %}
       <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
+      {% endif %}
       <td>{% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</td>
       <td>{% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
       <td>{{ cruise.safe_days }}</td>

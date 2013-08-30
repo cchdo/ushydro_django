@@ -62,6 +62,14 @@ class Cruise(models.Model):
             return False
 
     @property
+    def is_restricted(self):
+        return self._sterile
+
+    @property
+    def year(self):
+        return self.start_date.strftime("%Y")
+
+    @property
     def chief_scientists(self):
         l = []
         for cs in self.chief_scientist.all():
@@ -92,14 +100,14 @@ class Cruise(models.Model):
     @property
     def safe_start_port(self):
         if self._sterile() is True:
-            return "CLASSIFIED"
+            return self.start_port
         else:
             return self.start_port
 
     @property
     def safe_end_port(self):
         if self._sterile() is True:
-            return "CLASSIFIED"
+            return self.end_port
         else:
             return self.end_port
 
