@@ -24,6 +24,11 @@ class PI(models.Model):
     name = models.CharField(max_length=200)
     institution = models.ForeignKey(Institution)
 
+    class Meta:
+        ordering=[
+                "name",
+                ]
+
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.institution.abrev)
 
