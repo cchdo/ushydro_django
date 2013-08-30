@@ -37,7 +37,7 @@
     <tr>
       <td>{{ cruise.name }}</td>
       {% if cruise.is_restricted %}
-      <td>{{ cruise.year }}</td>
+      <td>{{ cruise.year|safe }}</td>
       {% else %}
       <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
       {% endif %}

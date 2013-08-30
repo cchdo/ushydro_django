@@ -67,7 +67,11 @@ class Cruise(models.Model):
 
     @property
     def year(self):
-        return self.start_date.strftime("%Y")
+        s1 = "<span style='display: none;'>"
+        s2 = "</span>"
+        y = self.start_date.strftime("%Y")
+        m = self.start_date.strftime("%m")
+        return y + s1 + m + s2
 
     @property
     def chief_scientists(self):
