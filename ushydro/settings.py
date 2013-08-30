@@ -11,6 +11,7 @@ CACHES = {
         'LOCATION': '/var/tmp/django_cache',
     }
 }
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 ADMINS = (
         # ('Your Name', 'your_email@example.com'),
