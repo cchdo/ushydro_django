@@ -46,7 +46,7 @@
       <td>{{ cruise.safe_days }}</td>
       <td>{{ cruise.stations }}</td>
       <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
-      <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs}}</li>{% endfor %}<ul></td>
+      <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}<ul></td>
       {% for param in parameters %}
       <td>
         <ul>

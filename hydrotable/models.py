@@ -129,7 +129,7 @@ class Cruise(models.Model):
 
     @property
     def parameters(self):
-        return [p.parameter for p in self.programs]
+        return [p.parameter_id for p in self.programs]
 
 
 class Parameter(OrderedModel):
