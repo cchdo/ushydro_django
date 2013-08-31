@@ -6,81 +6,141 @@
 <div class="container">
   <div class="row">
     <div class="col-4">
-  <div class="data_status_key">
-      <h4>Data status color guide</h4>
-    <ul>
-      <li class="not_yet">Sampled, data not received</li>
-      <li class="preliminary">Data received, are non final</li>
-      <li class="final">Final data received</li>
-    </ul>
-  </div>
-</div>
-</div>
-<table id="datatable" >
-  <thead>
-    <tr>
-      <th>Cruise</th>
-      <th>Dates</th>
-      <th>Expocode<br/>(CTD, Bottle Data)</th>
-      <th>Ship</th>
-      <th>Days</th>
-      <th>Stations</th>
-      <th>Ports</th>
-      <th>Chief Scientist</th>
-      {% for param in parameters %}
-      <th> {{param.name|safe}}</th>
-      {% endfor %}
-    </tr>
-  </thead>
-  <tbody>
-    {% for cruise in cruises %}
-    <tr>
-      <td>{{ cruise.name }}</td>
-      {% if cruise.is_restricted %}
-      <td>{{ cruise.year|safe }}</td>
-      {% else %}
-      <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
-      {% endif %}
-      <td>{% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</td>
-      <td>{% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
-      <td>{{ cruise.safe_days }}</td>
-      <td>{{ cruise.stations }}</td>
-      <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
-      <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}<ul></td>
-      {% for param in parameters %}
-      <td>
+      <div class="data_status_key">
+        <h4>Data status color guide</h4>
         <ul>
-        {% if param in cruise.parameters %}
-        {% for program in cruise.programs %}
-        {% if program.parameter == param %}
-        <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
-        {% if program.url %}
-        <a href="{{program.url}}">
-          {% endif %}
-        {{ program.pi.name }}
-        {% if program.url %}
-    </a>
-    {% endif %}
-    {% if user.is_authenticated %}
-    {% if program.note %}
-    <br/>
-    <span class="program_notes">Notes: {{ program.note }}</span>
-    {% endif %}
-    {% endif %}
-        </li>
-        {% endif %}
+          <li class="not_yet">Sampled, data not received</li>
+          <li class="preliminary">Data received, are non final</li>
+          <li class="final">Final data received</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <table id="datatable" >
+    <thead>
+      <tr>
+        <th>Cruise</th>
+        <th>Dates</th>
+        <th>Expocode<br/>(CTD, Bottle Data)</th>
+        <th>Ship</th>
+        <th>Days</th>
+        <th>Stations</th>
+        <th>Ports</th>
+        <th>Chief Scientist</th>
+        {% for param in parameters %}
+        <th> {{param.name|safe}}</th>
         {% endfor %}
-  </ul>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cruise in cruises %}
+      <tr>
+        <td>
+          <a data-toggle="modal" href="#cruise{{cruise.id}}"><img height="20px" width="20px" src="/static/hydrotable/images/out_arrow.png"></a>
+          {{ cruise.name }}</td>
+        {% if cruise.is_restricted %}
+        <td>{{ cruise.year|safe }}</td>
         {% else %}
-        -
+        <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
         {% endif %}
-        {% endfor %}
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+        <td>{% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</td>
+        <td>{% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
+        <td>{{ cruise.safe_days }}</td>
+        <td>{{ cruise.stations }}</td>
+        <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
+        <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></td>
+            {% for param in parameters %}
+            <td>
+              <ul>
+                {% if param.id in cruise.parameters %}
+                {% for program in cruise.program_set.all %}
+                {% if program.parameter_id == param.id %}
+                <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
+                {% if program.url %}
+                <a href="{{program.url}}">
+                  {% endif %}
+                  {{ pi_names|hash:program.id }}
+                  {% if program.url %}
+                </a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                {% if program.note %}
+                <br/>
+                <span class="program_notes">Notes: {{ program.note }}</span>
+                {% endif %}
+                {% endif %}
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+              {% else %}
+              -
+              {% endif %}
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% for cruise in cruises %}
+    <div class="modal fade" id="cruise{{cruise.id}}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">{{cruise.expocode}}</h4>
+          </div>
+          <div class="modal-body">
+            <p>Line Name: {{ cruise.name }}</p>
+            <p>Date:{% if cruise.is_restricted %}
+            {{ cruise.year|safe }}
+            {% else %}
+            {{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}
+            {% endif %}
+            </p>
+            <p>Expocode: {% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</p>
+            <p>Ship: {% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</p>
+            <p>Number of Days: {{ cruise.safe_days }}</p>
+            <p>Number of Stations: {{ cruise.stations }}</p>
+            <p>Start Port: {{ cruise.safe_start_port }}</p>
+            <p>End Port: {{ cruise.safe_end_port }}</p>
+            <p>Chief Scientists<ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></p>
+                <p>Data Links and PIs:
+                <table>
+                  {% for param in parameters %}
+                  {% if param.id in cruise.parameters %}
+                  <tr>
+                    <td>{{param.name}}</td>
+                    <td>
+                      <ul>
+                        {% for program in cruise.program_set.all %}
+                        {% if program.parameter_id == param.id %}
+                        <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
+                        {% if program.url %}<a href="{{program.url}}">{% endif %}{{ pi_names|hash:program.id }}{% if program.url %}</a>{% endif %}
+                        
+                        {% if user.is_authenticated %}
+                         {% if program.note %}
+                         <br/>
+                         <span class="program_notes">Notes: {{ program.note }}</span>
+                         {% endif %}
+                         {% endif %}
+                        </li>
+                        {% endif %}
+                  {% endfor %}
+                      </ul>
+                  </td></tr>
+                  {% endif %}
+                  {% endfor %}
+                </table>
+                </div>
+                <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div>
+    {% endfor %}
 {% endif %}
 {% endblock %}
 {% block js %}
