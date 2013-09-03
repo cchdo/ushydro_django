@@ -1,6 +1,6 @@
 /* Set the defaults for DataTables initialisation */
 $.extend( true, $.fn.dataTable.defaults, {
-	"sDom": "<'row'<'col-6'l><'col-6'f>r>t<'row'<'col-6'i><'col-6'p>>",
+	"sDom": "<'row'<'col-lg-6 col-sm-6'l><'col-lg-6 col-sm-6'f>r>t<'row'<'col-sm-6 col-lg-6'i><'col-sm-6 col-lg-6'p>>",
 	"sPaginationType": "bootstrap",
 	"oLanguage": {
 		"sLengthMenu": "_MENU_ cruises per page"
