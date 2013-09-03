@@ -26,6 +26,17 @@
  *     ../images/ - relative to this CSS file.
  */
 
+.modal_param_name {
+  text-align: right;
+}
+.modal_param_list {
+  padding: 0;
+  margin: 0;
+}
+.modal-body p{
+  margin: 0;
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables features
  */

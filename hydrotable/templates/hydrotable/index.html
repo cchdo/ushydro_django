@@ -89,31 +89,32 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">{{cruise.expocode}}</h4>
+            <h4 class="modal-title">Cruise: {{cruise.name}} ({{cruise.expocode}})</h4>
           </div>
           <div class="modal-body">
-            <p>Line Name: {{ cruise.name }}</p>
-            <p>Date:{% if cruise.is_restricted %}
+            <p><b>Line Name:</b> {{ cruise.name }}</p>
+              <p><b>Date:</b>{% if cruise.is_restricted %}
             {{ cruise.year|safe }}
             {% else %}
             {{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}
             {% endif %}
             </p>
-            <p>Expocode: {% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</p>
-            <p>Ship: {% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</p>
-            <p>Number of Days: {{ cruise.safe_days }}</p>
-            <p>Number of Stations: {{ cruise.stations }}</p>
-            <p>Start Port: {{ cruise.safe_start_port }}</p>
-            <p>End Port: {{ cruise.safe_end_port }}</p>
-            <p>Chief Scientists<ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></p>
-                <p>Data Links and PIs:
+            <p><b>Expocode:</b> {% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</p>
+            <p><b>Ship:</b> {% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</p>
+            <p><b>Number of Days:</b> {{ cruise.safe_days }}</p>
+            <p><b>Number of Stations:</b> {{ cruise.stations }}</p>
+            <p><b>Start Port:</b> {{ cruise.safe_start_port }}</p>
+            <p><b>End Port:</b> {{ cruise.safe_end_port }}</p>
+            <p><b>Chief Scientists:</b><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></p>
+            <h4>Data Links and PIs:</h4>
+                <hr>
                 <table>
                   {% for param in parameters %}
                   {% if param.id in cruise.parameters %}
                   <tr>
-                    <td>{{param.name}}</td>
+                    <td class="modal_param_name"><b>{{param.name}}:</b></td>
                     <td>
-                      <ul>
+                      <ul class="modal_param_list">
                         {% for program in cruise.program_set.all %}
                         {% if program.parameter_id == param.id %}
                         <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
