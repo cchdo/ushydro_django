@@ -113,8 +113,19 @@
 }
 #datatable_wrapper th{
   padding:10px;
-  padding-right: 20px
+  padding-right: 20px;
 }
+// Hack to make datatable columns align properly with firefox
+// I never thought I would see the day where things worked properly
+// in IE and every other browser and I had to use a hack for mozilla
+// this should be removed when things are determined to be working again
+@-moz-document url-prefix() {
+#datatable_wrapper th{
+  padding:0;
+  padding-right: 0;
+}
+      }
+
 #datatable_wrapper td{
   padding:10px;
 }
