@@ -559,14 +559,12 @@ ol {
     bottom:1em;
     left: 15px;
     right: 15px;
-    height:1.45em;
     position:absolute;
     text-transform: uppercase;
     letter-spacing:.06em;
     text-align: center;
     font-size: 1.5em;
     color: white;
-    white-space: nowrap;
 }
 a>.blue, .blue .title{
     background-color: #0fbef4; /*bright blue from logo*/
