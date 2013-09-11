@@ -14,6 +14,7 @@ this template. There are a few size manipulation filters for this in
 {% if link %}<a href="{{ link }}"{% if instance.target_blank %} target="_blank"{% endif %}>{% endif %}<img{% if instance.alignment %} class="{{ instance.alignment }}"{% endif %} alt="{% if instance.alt %}{{ instance.alt }}{% endif %}" src="{{ thumbnail.url }}"{% if instance.caption %} title="{{ instance.caption }}"{% endif %} />{% if link %}</a>{% endif %}
 {% endcomment %}
 
+<div class="filer_image_container">
 {% if link %}<a href="{{ link }}"{% if instance.target_blank %} target="_blank"{% endif %} class="filer_image_link">{% endif %}
   {% if instance.image %}
   {% if instance.use_original_image %}
@@ -35,5 +36,5 @@ this template. There are a few size manipulation filters for this in
   </span>
   {% endif %}
   {% if link %}</a>{% endif %}
-
+</div>
 {% endspaceless %}
