@@ -120,12 +120,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'sekizai.context_processors.sekizai',
         )
 
+DEBUG_TOOLBAR_CONFIG = {
+        "INTERCEPT_REDIRECTS": False,
+        }
 MIDDLEWARE_CLASSES = (
         'django.middleware.common.CommonMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
         # Uncomment the next line for simple clickjacking protection:
         # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'cms.middleware.page.CurrentPageMiddleware',
@@ -135,6 +139,11 @@ MIDDLEWARE_CLASSES = (
         )
 
 ROOT_URLCONF = 'ushydro.urls'
+
+INTERNAL_IPS = (
+    '127.0.0.01',
+    '132.239.92.163',
+    )
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ushydro.wsgi.application'
@@ -158,6 +167,7 @@ INSTALLED_APPS = (
         'django.contrib.admin',
         # Uncomment the next line to enable admin documentation:
         # 'django.contrib.admindocs',
+        'debug_toolbar',
         'hydrotable',
         'bibliography',
         'smart_load_tag',
@@ -227,6 +237,8 @@ CMS_PERMISSION = True
 CMS_TEMPLATES = (
         ('home_page.html', 'Home Page'),
         ('template_2.html', 'Template Two'),
+        ('outreach.html', 'Outreach'),
+        ('sidenav.html', 'SideNav'),
         )
 
 CMS_PLACEHOLDER_CONF = {

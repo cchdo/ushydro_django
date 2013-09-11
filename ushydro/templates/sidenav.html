@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load sekizai_tags %}
+{% load cms_tags %}
+
+{% block outreach %}
+<div class="row">
+  <div class="col-3">
+    <div id="spynav" class="sidenav">
+    {% placeholder side_nav %}
+  </div>
+  </div>
+  <div class="col-9">
+    {% placeholder content %}
+  </div>
+</div>
+{% endblock %}
+{% block css %}
+{% addtoblock "css" %}
+<link href="/static/css/tiles.css" rel="stylesheet">
+<link href="/static/css/sidenav.css" rel="stylesheet">
+{% endaddtoblock %}
+{% endblock %}
+{% block js %}
+{% addtoblock "js" %}
+<script>
+  $('body').scrollspy({ target: '#spynav' })
+</script>
+{% endaddtoblock %}
+{% endblock %}

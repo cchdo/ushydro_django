@@ -1,0 +1,44 @@
+.sidenav{
+  position: absolute;
+}
+@media (max-width: 991px) and (min-width: 768px){
+  .sidenav{
+    width: 180px;
+  }
+}
+@media (min-width: 992px){
+  .sidenav{
+    width: 233px;
+  }
+}
+@media (min-width: 1200px){
+  .sidenav{
+    width: 289px;
+  }
+}
+.spied{
+  padding-top:70px;
+}
+.active {
+  background-color: #7FC2EB;
+}
+.active .active{
+  background-color: #4DAAE3;
+}
+
+#spynav a{
+  color: #000;
+  display: block;
+}
+
+#spynav a:hover{
+  background-color: #eee;
+  text-decoration: none;
+}
+#spynav ul li ul li{
+  list-style: circle;
+}
+
+#spynav{
+  background-color: #BAE5FF;
+}

@@ -19,6 +19,7 @@ urlpatterns = patterns('',
         #url(r'^bibliography/', include('bibliography.urls')),
        # url(r'^hydrotable/', include('hydrotable.urls')),
         url(r'^admin/', include(admin.site.urls)),
+        url(r'^cached.json', 'bibliography.views.cached_bibliography'),
         (r'^', include('cms.urls')),
         (r'^', include('cms.urls', namespace='imagestore')),
         )

@@ -11,7 +11,6 @@ $(function(){
   });
 });
 function scrollDeligate(e){
-  console.log("called")
   if ($(window).scrollTop() > nav_top) {
     $('.navbar').css('position', 'fixed');
   } else{
@@ -25,9 +24,13 @@ function scrollDeligate(e){
         s.css({'display':'none'});
       };
     s.fadeIn('fast');
+    $("#spynav").css('position', 'fixed');
+    $("#spynav").css('top', '70px');
 
   } else {
     $('.sticker').css({'visibility':'hidden'});
     $('body').css({'padding-top':'0px'})
+    $("#spynav").css('position', 'absolute');
+    $("#spynav").css('top', '0');
   }
 }

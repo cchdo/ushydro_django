@@ -56,9 +56,13 @@
             </div>
 
     {% block hydrotable %}{% endblock %}
-    {% block bibliography %}{% endblock %}
     <div class="container">
       {% block outreach %}{% endblock %}
+      <div class="row">
+        <div class="col-sm-9 col-lg-9 col-lg-offset-3 col-sm-offset-3">
+      {% block bibliography %}{% endblock %}
+    </div>
+  </div>
     </div>
     {% cms_toolbar %}
     {% spaceless %}
