@@ -8,6 +8,7 @@ $(function(){
 
     $(this).bind("touchmove", scrollDeligate);
     $(this).scroll(scrollDeligate);
+    scrollDeligate();
   });
 });
 function scrollDeligate(e){
