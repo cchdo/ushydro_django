@@ -12,6 +12,7 @@
           <li class="not_yet">Sampled, data not received</li>
           <li class="preliminary">Data avaliable as received</li>
           <li class="final">Data avaliable in standard format</li>
+          <li class="isdata">A link to Data</li>
         </ul>
       </div>
     </div>
@@ -43,7 +44,7 @@
         {% else %}
         <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
         {% endif %}
-        <td>{% if cruise.expocode_link %}<a target="_blank" href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</td>
+        <td>{% if cruise.expocode_link %}<ul><a  target="_blank" href="{{cruise.expocode_link}}"><li class="isdata">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</li></a></ul>{% endif %}</td>
         <td>{% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
         <td>{{ cruise.safe_days }}</td>
         <td>{{ cruise.stations }}</td>
@@ -55,7 +56,7 @@
                 {% if param.id in cruise.parameters %}
                 {% for program in cruise.program_set.all %}
                 {% if program.parameter_id == param.id %}
-                <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
+                <li class="{% if program.is_data == 1 %}isdata {% endif %}{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
                 {% if program.url %}
                 <a target="_blank" href="{{program.url}}">
                   {% endif %}
@@ -99,7 +100,7 @@
             {{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}
             {% endif %}
             </p>
-            <p><b>Expocode:</b> {% if cruise.expocode_link %}<a target="_blank" href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</p>
+            <p><b>Expocode:</b> {% if cruise.expocode_link %}<a class="isdata" target="_blank" href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</p>
             <p><b>Ship:</b> {% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</p>
             <p><b>Number of Days:</b> {{ cruise.safe_days }}</p>
             <p><b>Number of Stations:</b> {{ cruise.stations }}</p>
@@ -112,12 +113,12 @@
                   {% for param in parameters %}
                   {% if param.id in cruise.parameters %}
                   <tr>
-                    <td class="modal_param_name"><b>{{param.name}}:</b></td>
+                    <td class="modal_param_name"><b>{{param.name|safe}}:</b></td>
                     <td>
                       <ul class="modal_param_list">
                         {% for program in cruise.program_set.all %}
                         {% if program.parameter_id == param.id %}
-                        <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
+                        <li class="{% if program.is_data == 1 %}isdata {% endif %}{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
                         {% if program.url %}<a target="_blank" href="{{program.url}}">{% endif %}{{ pi_names|hash:program.id }}{% if program.url %}</a>{% endif %}
                         
                         {% if user.is_authenticated %}

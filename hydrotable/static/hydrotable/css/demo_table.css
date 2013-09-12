@@ -462,3 +462,11 @@ tr.even td.sorting_3 {
 	background-color: #F9F9FF;
 }
 */
+
+.isdata{
+  background-color: #4BABE6;
+}
+.modal a{
+  text-decoration: underline;
+  color: #000;
+}
