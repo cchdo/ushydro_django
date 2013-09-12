@@ -43,8 +43,8 @@
         {% else %}
         <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
         {% endif %}
-        <td>{% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</td>
-        <td>{% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
+        <td>{% if cruise.expocode_link %}<a target="_blank" href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</td>
+        <td>{% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
         <td>{{ cruise.safe_days }}</td>
         <td>{{ cruise.stations }}</td>
         <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
@@ -57,7 +57,7 @@
                 {% if program.parameter_id == param.id %}
                 <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
                 {% if program.url %}
-                <a href="{{program.url}}">
+                <a target="_blank" href="{{program.url}}">
                   {% endif %}
                   {{ pi_names|hash:program.id }}
                   {% if program.url %}
@@ -99,8 +99,8 @@
             {{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}
             {% endif %}
             </p>
-            <p><b>Expocode:</b> {% if cruise.expocode_link %}<a href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</p>
-            <p><b>Ship:</b> {% if cruise.ship.url %}<a href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</p>
+            <p><b>Expocode:</b> {% if cruise.expocode_link %}<a target="_blank" href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</p>
+            <p><b>Ship:</b> {% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</p>
             <p><b>Number of Days:</b> {{ cruise.safe_days }}</p>
             <p><b>Number of Stations:</b> {{ cruise.stations }}</p>
             <p><b>Start Port:</b> {{ cruise.safe_start_port }}</p>
@@ -118,7 +118,7 @@
                         {% for program in cruise.program_set.all %}
                         {% if program.parameter_id == param.id %}
                         <li class="{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
-                        {% if program.url %}<a href="{{program.url}}">{% endif %}{{ pi_names|hash:program.id }}{% if program.url %}</a>{% endif %}
+                        {% if program.url %}<a target="_blank" href="{{program.url}}">{% endif %}{{ pi_names|hash:program.id }}{% if program.url %}</a>{% endif %}
                         
                         {% if user.is_authenticated %}
                          {% if program.note %}
