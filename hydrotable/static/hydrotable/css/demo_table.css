@@ -104,7 +104,7 @@
   text-decoration: underline;
 }
 
-.DTFC_ScrollWrapper * {
+.DTFC_ScrollWrapper *, #datatable_wrapper * {
   box-sizing: content-box;
 }
 
@@ -112,24 +112,24 @@
   white-space: nowrap;
 }
 #datatable_wrapper th{
-  padding:10px;
-  padding-right: 20px;
+  padding:0px;
+  padding-left: 10px;
 }
-// Hack to make datatable columns align properly with firefox
-// I never thought I would see the day where things worked properly
-// in IE and every other browser and I had to use a hack for mozilla
-// this should be removed when things are determined to be working again
-@-moz-document url-prefix() {
-#datatable_wrapper th{
-  padding:0;
-  padding-right: 0;
-}
-      }
 
 #datatable_wrapper td{
   padding:10px;
 }
 
+// Hack to make datatable columns align properly with firefox
+// I never thought I would see the day where things worked properly
+// in IE and every other browser and I had to use a hack for mozilla
+// this should be removed when things are determined to be working again
+@-moz-document url-prefix() {
+#datatable_wrapper th, #datatable_wrapper td{
+  padding:0;
+  padding-right: 0;
+}
+}
 .dataTables_wrapper {
 	position: relative;
 	clear: both;
@@ -284,15 +284,15 @@ table.display td.center {
  */
 
 .sorting_asc {
-	background: url('../images/sort_asc.png') no-repeat center right;
+	background: url('../images/sort_asc.png') no-repeat center left;
 }
 
 .sorting_desc {
-	background: url('../images/sort_desc.png') no-repeat center right;
+	background: url('../images/sort_desc.png') no-repeat center left;
 }
 
 .sorting {
-	background: url('../images/sort_both.png') no-repeat center right;
+	background: url('../images/sort_both.png') no-repeat center left;
 }
 
 .sorting_asc_disabled {
