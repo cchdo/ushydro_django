@@ -676,3 +676,11 @@ ol {
     text-transform: uppercase;
 }
 
+.filer_image_container .left{
+  margin: 5px;
+  float: left;
+}
+.filer_image_container .right{
+  margin: 5px;
+  float: right;
+}

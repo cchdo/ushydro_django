@@ -3,14 +3,24 @@
 {% load cms_tags %}
 
 {% block outreach %}
-<div class="featured orange">
+<div class="row">
+<div class="latest">
+  <h3>Newest:</h3>
+  <hr />
+{% placeholder latest %}
+</div>
+</div>
+<div class="row">
+<div class="tiles featured orange">
+  <h4>Featured:</h4>
+  <hr />
 {% placeholder featured %}
 </div>
+</div>
+<div class="row">
 <div class="tiles">
 {% placeholder tiles %}
 </div>
-<div class="latest">
-{% placeholder latest %}
 </div>
     {% block bibliography %}{% endblock %}
 {% endblock %}

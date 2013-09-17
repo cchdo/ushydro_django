@@ -1,7 +1,6 @@
 .floating_blog_list{
   position: relative;
   float: left;
-  width: 50%;
   padding-right: 15px;
   padding-left: 15px;
   margin-bottom: 15px;
@@ -14,17 +13,17 @@
   margin-bottom: 15px;
 }
 @media (min-width: 768px){
-  .featured .filer_image_container{
+  .featured .filer_image_container, .floating_blog_list{
     width: 33.333333333333333%;
   }
 }
 @media (max-width: 768px){
-  .featured .filer_image_container{
+  .featured .filer_image_container, .floating_blog_list{
     width: 50%;
   }
 }
 @media (max-width: 500px){
-  .featured .filer_image_container{
+  .featured .filer_image_container, .floating_blog_list{
     width: 100%;
   }
 }
