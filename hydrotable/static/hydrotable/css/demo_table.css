@@ -104,7 +104,7 @@
   text-decoration: underline;
 }
 
-.DTFC_ScrollWrapper *, #datatable_wrapper * {
+.DTFC_ScrollWrapper *{
   box-sizing: content-box;
 }
 
