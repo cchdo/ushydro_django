@@ -169,6 +169,7 @@ INSTALLED_APPS = (
         # 'django.contrib.admindocs',
         'debug_toolbar',
         'hydrotable',
+        'hydromap',
         'bibliography',
         'smart_load_tag',
         'cms',
