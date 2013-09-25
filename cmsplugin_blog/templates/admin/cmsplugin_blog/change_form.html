@@ -1,0 +1,10 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+{% load cmsplugin_blog_tags %}
+{{ block.super }}
+{% if not add %}
+    <script type="text/javascript" src="{% if STATIC_URL %}{{ STATIC_URL }}{% else %}{{ MEDIA_URL }}{% endif %}cmsplugin_blog/change_form.js"></script>
+{% endif %}
+    {% admin_helpers %}
+{% endblock %}
