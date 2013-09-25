@@ -182,6 +182,7 @@ INSTALLED_APPS = (
         'filer',
         'easy_thumbnails',
         'cmsplugin_filer_image',
+        'cmsplugin_filer_file',
         'cmsplugin_blog',
         'djangocms_utils',
         'simple_translation',
