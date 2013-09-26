@@ -684,3 +684,7 @@ ol {
   margin: 5px;
   float: right;
 }
+
+#gallery img{
+  margin-bottom: 5px;
+}
