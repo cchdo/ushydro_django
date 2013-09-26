@@ -10,9 +10,34 @@
 {% block right-col %}{% endblock %}
 </div>
 </div>
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
 {% endblock %}
 {% block css %}
 {% addtoblock "css" %}
 <link href="/static/css/tiles.css" rel="stylesheet">
+<link href="/static/css/blueimp-gallery.min.css" rel="stylesheet">
+{% endaddtoblock %}
+{% endblock %}
+{% block js %}
+{% addtoblock "js" %}
+<script src="/static/js/blueimp-gallery.min.js"></script>
+<script>
+document.getElementById('gallery').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+</script>
 {% endaddtoblock %}
 {% endblock %}
