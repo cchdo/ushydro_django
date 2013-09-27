@@ -16,14 +16,14 @@ google.setOnLoadCallback(function () {
     var track;
     var bounds;
 
-    var icon_letter = new gm.Icon(G_DEFAULT_ICON, '../images/s4p/NBP_blog_letter.png');
+    var icon_letter = new gm.Icon(G_DEFAULT_ICON, '/legacy/s4p/NBP_blog_letter.png');
     icon_letter.shadow = '';
-    icon_letter.transparent = '../images/s4p/NBP_blog_letter_transparency.png';
+    icon_letter.transparent = '/legacy/s4p/NBP_blog_letter_transparency.png';
     icon_letter.iconSize = new gm.Size(50, 31);
     icon_letter.iconAnchor = new gm.Point(25, 31); // move icons upward to show the track better
     icon_letter.imageMap = [1,16,9,6,17,2,21,0,31,6,34,10,60,15,58,39,21,35,16,34,4,35,2,30,1,16];
-    var icon_report = new gm.Icon(icon_letter, '../images/s4p/NBP_blog_report.png');
-    icon_report.transparent = '../images/s4p/NBP_blog_report_transparency.png';
+    var icon_report = new gm.Icon(icon_letter, '/legacy/s4p/NBP_blog_report.png');
+    icon_report.transparent = '/legacy/s4p/NBP_blog_report_transparency.png';
     icon_report.imageMap = [0,14,17,14,18,4,35,2,28,2,42,2,43,8,47,7,51,20,49,30,1,30,0,17];
 
     // Set the map to Terrain type. Use setUIToDefault() to obtain Terrain
@@ -35,7 +35,7 @@ google.setOnLoadCallback(function () {
     // ship's progress.
     jQuery.ajax({
         type: 'GET',
-        url: '/progress/positions',
+        url: '/legacy/s4p/positions.json',
         datatype: 'json',
         success: function (data) {
           // Extract the coordinates from each position object and construct
@@ -60,7 +60,7 @@ google.setOnLoadCallback(function () {
           // Request correspondence and plot it on the map.
           jQuery.ajax({
               type: 'GET',
-              url: '/progress/posts',
+              url: '/legacy/s4p/posts.json',
               datatype: 'json',
               success: function (data) {
                 // Construct a gm.Marker for each email.
