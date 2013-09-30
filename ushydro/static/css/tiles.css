@@ -98,3 +98,14 @@ a>.orange, .orange .title{
     opacity: 1;
     transform: translateY(100%);
 }
+.blog_post .filer_image_info{
+  position: static;
+}
+.blog_post .filer_image_info .title {
+    position: static;
+    text-transform: none;
+    letter-spacing: normal;
+    text-align: left;
+    font-size: 0.9em;
+    color: black;
+}
