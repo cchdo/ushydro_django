@@ -112,7 +112,7 @@ a>.orange, .orange .title{
 }
 .blog_post .caption, .blog_post .desc {
   overflow: visible;
-    background-color: rgba(f,f,f,1.0);
+    background-color: #fff;
     position: static;
     color: #000;
     -webkit-transition: none;
