@@ -121,10 +121,11 @@ a>.orange, .orange .title{
     -ms-transition: none;
     transition: none;
     padding: 0px;
+    display: block;
 
 }
-.desc, .fade-caption, .box .scale-caption {
-    opacity: 0;
+.blog_post .desc, .blog_post .fade-caption, .blog_post .box .scale-caption {
+    opacity: 1;
     height: inherit;
     text-align: left;
 }
