@@ -110,3 +110,21 @@ a>.orange, .orange .title{
     font-size: 0.9em;
     color: black;
 }
+.blog_post .caption, .blog_post .desc {
+  overflow: visible;
+    background-color: rgba(f,f,f,1.0);
+    position: static;
+    color: #000;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+    transition: none;
+    padding: 0px;
+
+}
+.desc, .fade-caption, .box .scale-caption {
+    opacity: 0;
+    height: inherit;
+    text-align: left;
+}
