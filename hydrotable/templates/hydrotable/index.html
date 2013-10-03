@@ -3,7 +3,7 @@
 {% load sekizai_tags %}
 {% block hydrotable %}
 {% if cruises %}
-<div class="container">
+<div class="hydro_container">
   <div class="row">
     <div class="col-sm-4 col-lg-4">
       <div class="data_status_key">
@@ -152,6 +152,7 @@
 <script src="/static/hydrotable/js/FixedColumns.js" ></script>
 <script>
   var mtable;
+  var hydrotable_top = 0;
   $(window).load( function () {
     var oTable = $('#datatable').dataTable( {
       "sScrollX": "100%",
@@ -164,6 +165,30 @@
       }
     } );
     new FixedColumns( oTable);
+
+    hydrotable_top = $(".DTFC_ScrollWrapper").offset().top;
+    $(window).scroll(function(){
+      if ($(window).scrollTop() > hydrotable_top - 50){
+        $(".dataTables_scrollHead").css("position", "fixed");
+        $(".dataTables_scrollHead").css("top", "50px");
+        $(".dataTables_scrollHead").css("background-color", "#fff");
+        $(".dataTables_scrollBody").css("margin-top", "80px");
+        $(".DTFC_LeftHeadWrapper").css("position", "fixed");
+        $(".DTFC_LeftHeadWrapper").css("top", "50px");
+        $(".DTFC_LeftHeadWrapper").css("z-index", "5");
+        $(".DTFC_LeftHeadWrapper").css("left", "auto");
+        $(".DTFC_LeftBodyWrapper").css("margin-top", "80px");
+        } else {
+        $(".dataTables_scrollHead").css("position", "relative");
+        $(".dataTables_scrollHead").css("top", "0px");
+        $(".dataTables_scrollBody").css("margin-top", "0px");
+        $(".DTFC_LeftHeadWrapper").css("position", "relative");
+        $(".DTFC_LeftHeadWrapper").css("top", "0px");
+        $(".DTFC_LeftHeadWrapper").css("z-index", "5");
+        $(".DTFC_LeftHeadWrapper").css("left", "0px");
+        $(".DTFC_LeftBodyWrapper").css("margin-top", "0px");
+      }
+    });
 
     $('.DTFC_ScrollWrapper').append('<div class="rightgradient"></div>');
     $('.DTFC_LeftWrapper').append('<div class="leftarrow arrowhide"></div>');
