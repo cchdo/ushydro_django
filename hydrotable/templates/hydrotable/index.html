@@ -165,6 +165,13 @@
       }
     } );
     new FixedColumns( oTable);
+    $(".dataTables_scrollBody").scroll(function(){
+      $(".dataTables_scrollHead").css("width", $(".dataTables_scroll").css("width"));
+    });
+    $(window).resize(function(){
+      $(".dataTables_scrollHead").css("width", $(".dataTables_scroll").css("width"));
+    });
+    $(".dataTables_scrollBody").css("overflow-y", "hidden");
 
     hydrotable_top = $(".DTFC_ScrollWrapper").offset().top;
     $(window).scroll(function(){
@@ -172,6 +179,7 @@
         $(".dataTables_scrollHead").css("position", "fixed");
         $(".dataTables_scrollHead").css("top", "50px");
         $(".dataTables_scrollHead").css("background-color", "#fff");
+        $(".dataTables_scrollHead").css("z-index", "5");
         $(".dataTables_scrollBody").css("margin-top", "80px");
         $(".DTFC_LeftHeadWrapper").css("position", "fixed");
         $(".DTFC_LeftHeadWrapper").css("top", "50px");
@@ -190,24 +198,25 @@
       }
     });
 
+
     $('.DTFC_ScrollWrapper').append('<div class="rightgradient"></div>');
     $('.DTFC_LeftWrapper').append('<div class="leftarrow arrowhide"></div>');
     $('.DTFC_ScrollWrapper').append('<div class="rightarrow arrowhide"></div>');
     $('.rightarrow').click(function(){
       e = $('.dataTables_scrollBody')
       s = e.scrollLeft();
-      w = e.width()/2
+      w = e.width()/1.5
       e.animate({
         scrollLeft: s + w
-      }, 250);
+      }, 150);
     });
     $('.leftarrow').click(function(){
       e = $('.dataTables_scrollBody')
       s = e.scrollLeft();
-      w = e.width()/2
+      w = e.width()/1.5
       e.animate({
         scrollLeft: s - w
-      }, 250);
+      }, 150);
     });
 
     $(window).resize(function() {
