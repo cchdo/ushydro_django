@@ -105,7 +105,7 @@
 }
 
 .DTFC_ScrollWrapper *{
-  box-sizing: content-box;
+  //box-sizing: content-box;
 }
 
 #datatable_wrapper table{
