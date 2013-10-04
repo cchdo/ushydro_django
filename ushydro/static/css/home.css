@@ -3,4 +3,6 @@
     color: #467eb2;/*dark blue*/
     text-align: center;
 }
-
+.featured_outreach .floating_blog_list{
+  width: 100%;
+}
