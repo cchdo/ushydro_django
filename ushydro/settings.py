@@ -185,6 +185,7 @@ INSTALLED_APPS = (
         'cmsplugin_filer_file',
         'cmsplugin_blog',
         'djangocms_utils',
+        'cmsplugin_youtube',
         'simple_translation',
         'tagging',
         'missing',
