@@ -129,3 +129,6 @@ a>.orange, .orange .title{
     height: inherit;
     text-align: left;
 }
+.blog_post blue, .blog_post orange{
+  background-color: transparent;
+}
