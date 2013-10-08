@@ -147,9 +147,9 @@ class Program(models.Model):
     is_data = models.BooleanField(default=False)
 
     status_choices = (
-            (1, "Sampled, Not Recieved"),
-            (2, "Received, Non-final"),
-            (3, "Received, Final"),
+            (1, "Sampled, data not received"),
+            (2, "Data avaliable as received"),
+            (3, "Data avaliable in standard format"),
             )
     data_status = models.IntegerField(choices=status_choices, default=1)
     note = models.TextField(null=True, blank=True)
