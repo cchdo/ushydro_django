@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load helpers %}
+{% load sekizai_tags %}
+{% block hydrotable %}
+<div class="container">
+  <ul id="sortme">
+    {% for param in parameters %}
+      <li id="{{param.p_id}}">{{param.param_name|safe}}</li>
+    {% endfor %}
+  </ul>
+    <input id="build_table" name="build_table" type="submit" value="Build Table" />
+  </div>
+  {% endblock %}
+  {% block css %}
+  {% addtoblock "css" %}
+  <link href="/static/hydrotable/css/custom_table.css" rel="stylesheet" >
+  {% endaddtoblock %}
+  {% endblock %}
+  {% block js %}
+  {% addtoblock "js" %}
+   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script>
+    $("#sortme").sortable();
+    $("#build_table").click(function(){
+      window.location = "/hydrotable/custom/build/?" + $("#sortme").sortable("serialize");
+    });
+  </script>
+  {% endaddtoblock %}
+  {% endblock %}

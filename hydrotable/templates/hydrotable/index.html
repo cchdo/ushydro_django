@@ -21,6 +21,7 @@
     <thead>
       <tr>
         <th>Cruise</th>
+        {% if custom == "False" %}
         <th>Dates</th>
         <th>Expocode<br/>(CTD, Bottle Data)</th>
         <th>Ship</th>
@@ -28,8 +29,25 @@
         <th>Stations</th>
         <th>Ports</th>
         <th>Chief Scientist</th>
+        {% endif %}
         {% for param in parameters %}
+        {% if param == "dates" %}
+        <th>Dates</th>
+        {% elif param == "expocode" %}
+        <th>Expocode</th>
+        {% elif param == "ship" %}
+        <th>Ship</th>
+        {% elif param == "days" %}
+        <th>Days</th>
+        {% elif param == "stations" %}
+        <th>Stations</th>
+        {% elif param == "ports" %}
+        <th>Ports</th>
+        {% elif param == "cs" %}
+        <th>Chief Scientist</th>
+        {% else %}
         <th> {{param.name|safe}}</th>
+        {% endif %}
         {% endfor %}
       </tr>
     </thead>
@@ -39,6 +57,7 @@
         <td>
           <a data-toggle="modal" href="#cruise{{cruise.id}}"><img height="20px" width="20px" src="/static/hydrotable/images/out_arrow.png"></a>
           {{ cruise.name }}</td>
+        {% if custom == "False" %}
         {% if cruise.is_restricted %}
         <td>{{ cruise.year|safe }}</td>
         {% else %}
@@ -50,7 +69,28 @@
         <td>{{ cruise.stations }}</td>
         <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
         <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></td>
-            {% for param in parameters %}
+        {% endif %}
+        {% for param in parameters %}
+            {% if param == "dates" %}
+              {% if cruise.is_restricted %}
+                <td>{{ cruise.year|safe }}</td>
+              {% else %}
+                <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
+              {% endif %}
+        {% elif param == "expocode" %}
+        <td>{% if cruise.expocode_link %}<ul><a  target="_blank" href="{{cruise.expocode_link}}"><li class="isdata">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</li></a></ul>{% endif %}</td>
+        {% elif param == "ship" %}
+        <td>{% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
+        {% elif param == "days" %}
+        <td>{{ cruise.safe_days }}</td>
+        {% elif param == "stations" %}
+        <td>{{ cruise.stations }}</td>
+        {% elif param == "ports" %}
+        <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
+        {% elif param == "cs" %}
+        <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></td>
+        {% else %}
+
             <td>
               <ul>
                 {% if param.id in cruise.parameters %}
@@ -77,6 +117,7 @@
               {% else %}
               -
               {% endif %}
+            {% endif %}
               {% endfor %}
             </td>
           </tr>

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load helpers %}
+{% load sekizai_tags %}
+{% block hydrotable %}
+<div class="container">
+  <a href="#" id="select_all">Select All</a><br />
+  <a href="#" id="select_none">Select None</a>
+  <form action="step2/" method="post">{% csrf_token %}
+    <ul id="param_list">
+      <li><label><input name="columns" type="checkbox" value="p_dates" checked> Dates</label></li>
+      <li><label><input name="columns" type="checkbox" value="p_expocode" checked> Expocode<br/>(CTD, Bottle Data)</label></li>
+      <li><label><input name="columns" type="checkbox" value="p_ship" checked> Ship</label></li>
+      <li><label><input name="columns" type="checkbox" value="p_days" checked> Days</label></li>
+      <li><label><input name="columns" type="checkbox" value="p_stations" checked> Stations</label></li>
+      <li><label><input name="columns" type="checkbox" value="p_ports" checked> Ports</label></li>
+      <li><label><input name="columns" type="checkbox" value="p_cs" checked> Chief Scientist</label></li>
+      {% for param in parameters %}
+      <li><label>
+        <input name="columns" type="checkbox" value="p_{{param.id}}" checked>
+        {{ param.name|safe }}
+      </label>
+      </li>
+      {% endfor %}
+    </ul>
+    Build table with:
+    <input name="custom_table" type="submit" value="Custom Column Order" />
+    <input name="build_table" type="submit" value="Default Column Order" />
+    </form >
+  </div>
+  {% endblock %}
+  {% block css %}
+  {% addtoblock "css" %}
+  <link href="/static/hydrotable/css/custom_table.css" rel="stylesheet" >
+  {% endaddtoblock %}
+  {% endblock %}
+  {% block js %}
+  {% addtoblock "js" %}
+  <script>
+    $('#select_none').click(function(event) {   
+      $(':checkbox').each(function() {
+        this.checked = false;                        
+      });
+    });
+    $('#select_all').click(function(event) {   
+      $(':checkbox').each(function() {
+        this.checked = true;                        
+      });
+    });
+  </script>
+  {% endaddtoblock %}
+  {% endblock %}
