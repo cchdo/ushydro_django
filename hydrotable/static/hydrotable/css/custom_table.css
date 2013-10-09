@@ -3,3 +3,10 @@
   -moz-column-count: 3;
   column-count: 3;
 }
+.sort_item{
+  border: solid 1px #4BABE6;
+  border-left-width: 15px;
+  background: #fff;
+  margin: 5px;
+  padding: 2px;
+}

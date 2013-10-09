@@ -3,12 +3,23 @@
 {% load sekizai_tags %}
 {% block hydrotable %}
 <div class="container">
+  <div class="row">
+    <div class="col-6">
   <ul id="sortme">
     {% for param in parameters %}
-      <li id="{{param.p_id}}">{{param.param_name|safe}}</li>
+      <li class="sort_item" id="{{param.p_id}}">{{param.param_name|safe}}</li>
     {% endfor %}
   </ul>
-    <input id="build_table" name="build_table" type="submit" value="Build Table" />
+    <input class="btn btn-primary build_table" name="build_table" type="submit" value="Build Table" />
+  </div>
+  <div class="col-6">
+    <h4>How to Sort</h4>
+    <p>To change the order of the columns in your custom table, 
+    drag the items up and down in the list on the left untill they are in the order you want. Then click the  
+    <input class="btn btn-primary btn-xs build_table" name="build_table" type="submit" value="Build Table" />
+    button.</p>
+  </div>
+  </div>
   </div>
   {% endblock %}
   {% block css %}
@@ -21,7 +32,7 @@
    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script>
     $("#sortme").sortable();
-    $("#build_table").click(function(){
+    $(".build_table").click(function(){
       window.location = "/hydrotable/custom/build/?" + $("#sortme").sortable("serialize");
     });
   </script>

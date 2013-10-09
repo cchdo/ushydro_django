@@ -3,8 +3,18 @@
 {% load sekizai_tags %}
 {% block hydrotable %}
 <div class="container">
-  <a href="#" id="select_all">Select All</a><br />
-  <a href="#" id="select_none">Select None</a>
+  <div class="row">
+    <div class="col-10">
+      <h4>How to Select</h4>
+      Make sure the parameters you want to see in your custom table are checked. You can click either the text or the checkbox to toggle the selection. At least one parameter must be selected. Then select either Custom Column Order or Default Column Order at the bottom.
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p><button id="select_all" type="button" class="btn btn-info">Select All</button>
+      <button id="select_none" type="button" class="btn btn-warning">Select None</button></p>
+    </div>
+  </div>
   <form action="step2/" method="post">{% csrf_token %}
     <ul id="param_list">
       <li><label><input name="columns" type="checkbox" value="p_dates" checked> Dates</label></li>
@@ -15,7 +25,7 @@
       <li><label><input name="columns" type="checkbox" value="p_ports" checked> Ports</label></li>
       <li><label><input name="columns" type="checkbox" value="p_cs" checked> Chief Scientist</label></li>
       {% for param in parameters %}
-      <li><label>
+      <li id="p_{{param.id}}"><label>
         <input name="columns" type="checkbox" value="p_{{param.id}}" checked>
         {{ param.name|safe }}
       </label>
@@ -23,8 +33,8 @@
       {% endfor %}
     </ul>
     Build table with:
-    <input name="custom_table" type="submit" value="Custom Column Order" />
-    <input name="build_table" type="submit" value="Default Column Order" />
+    <input class="btn btn-primary" name="custom_table" type="submit" value="Custom Column Order" />
+    <input class="btn btn-primary" name="build_table" type="submit" value="Default Column Order" />
     </form >
   </div>
   {% endblock %}
@@ -35,17 +45,28 @@
   {% endblock %}
   {% block js %}
   {% addtoblock "js" %}
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script>
     $('#select_none').click(function(event) {   
       $(':checkbox').each(function() {
         this.checked = false;                        
       });
+      min_needed_checked();
     });
     $('#select_all').click(function(event) {   
       $(':checkbox').each(function() {
         this.checked = true;                        
       });
+      min_needed_checked();
     });
+    $(':checkbox').click(min_needed_checked);
+    function min_needed_checked(){
+      if($(":checked").length < 1){
+        $(":submit").attr('disabled','disabled');
+        }else {
+        $(":submit").removeAttr('disabled');
+      }
+    }
   </script>
   {% endaddtoblock %}
   {% endblock %}

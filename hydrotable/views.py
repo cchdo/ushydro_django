@@ -35,6 +35,16 @@ def custom(request):
 def step2(request):
     if request.method != "POST":
         return redirect(custom)
+    if u"build_table" in request.POST:
+        url = "?"
+        for item in request.POST.getlist(u'columns'):
+            s = item[:1] + "[]=" + item[2:] + "&"
+            url += s
+        return redirect("/hydrotable/custom/build/" +  url)
+
+
+        
+        
     # Probably the worst code I've ever written
     ParamList = namedtuple('ParamList', ['p_id', 'param_name'])
     desired_list = []
