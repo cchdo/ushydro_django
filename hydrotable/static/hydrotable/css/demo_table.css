@@ -58,6 +58,8 @@
 
 .program_notes{
   font-size: 0.8em;
+  white-space: normal;
+  display: block;
 }
 
 .rightgradient{
