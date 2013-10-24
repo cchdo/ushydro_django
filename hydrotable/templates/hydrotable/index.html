@@ -220,17 +220,18 @@
 
     hydrotable_top = $(".DTFC_ScrollWrapper").offset().top;
     $(window).scroll(function(){
+      var head_width = $(".dataTables_scrollHead").height();
       if ($(window).scrollTop() > hydrotable_top - 50){
         $(".dataTables_scrollHead").css("position", "fixed");
         $(".dataTables_scrollHead").css("top", "50px");
         $(".dataTables_scrollHead").css("background-color", "#fff");
         $(".dataTables_scrollHead").css("z-index", "5");
-        $(".dataTables_scrollBody").css("margin-top", "80px");
+        $(".dataTables_scrollBody").css("margin-top", head_width);
         $(".DTFC_LeftHeadWrapper").css("position", "fixed");
         $(".DTFC_LeftHeadWrapper").css("top", "50px");
         $(".DTFC_LeftHeadWrapper").css("z-index", "5");
         $(".DTFC_LeftHeadWrapper").css("left", "auto");
-        $(".DTFC_LeftBodyWrapper").css("margin-top", "80px");
+        $(".DTFC_LeftBodyWrapper").css("margin-top", head_width);
         } else {
         $(".dataTables_scrollHead").css("position", "relative");
         $(".dataTables_scrollHead").css("top", "0px");
