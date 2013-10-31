@@ -48,6 +48,7 @@ h1, h2, h3, h4, h5, h6, h7 {
 .left {
     text-align: left
 }
+
 .subtitle {
     font-weight: 700;
 }
@@ -676,13 +677,16 @@ ol {
     text-transform: uppercase;
 }
 
-.filer_image_container .left{
+.filer_image_container.left{
   margin: 5px;
   float: left;
 }
-.filer_image_container .right{
+.filer_image_container.right{
   margin: 5px;
   float: right;
+}
+.filer_image_container .filer_image_info{
+  text-size: 11px;
 }
 
 #gallery img{
