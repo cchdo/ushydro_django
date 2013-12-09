@@ -3,6 +3,11 @@
 {% load sekizai_tags %}
 {% block hydrotable %}
 {% if cruises %}
+<div class="container" id="loading_message">
+  <div class="well">The Hydrotable is being built, this should only take a few seconds (less than 5).
+    <noscript><br />Our fancy table needs JavaScript to work well, if JavaScript is disabled or something went wrong, the table
+  will still appear though it will be less fancy</noscript></div>
+</div>
 <div class="hydro_container">
   <div class="row">
     <div class="col-sm-4 col-lg-4">
@@ -192,6 +197,9 @@
 {% endblock %}
 {% block js %}
 {% addtoblock "js" %}
+  <script>
+  $(".hydro_container").css("visibility", "hidden");
+  </script>
 <script src="/static/hydrotable/js/jquery.dataTables.js" ></script>
 <script src="/static/hydrotable/js/dataTables.bootstrap.js" ></script>
 <script src="/static/hydrotable/js/FixedColumns.js" ></script>
@@ -273,6 +281,9 @@
         $('.arrowhide').show();
       }
     });
+
+    $(".hydro_container").css("visibility", "visible");
+    $(".well").css("display", "none");
   } );
 </script>
 {% endaddtoblock %}
