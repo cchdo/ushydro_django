@@ -55,7 +55,7 @@
         {% elif param == "cs" %}
         <th>Chief Scientist</th>
         {% else %}
-        <th> {{param.name_with_year|safe}}</th>
+        <th> {{param.name|safe}}</th>
         {% endif %}
         {% endfor %}
       </tr>
@@ -65,12 +65,12 @@
       <tr>
         <td>
           <a data-toggle="modal" href="#cruise{{cruise.id}}"><img height="20px" width="20px" src="/static/hydrotable/images/out_arrow.png"></a>
-          {{ cruise.name }}</td>
+          {{ cruise.name_with_year|safe }}</td>
         {% if custom == "False" %}
         {% if cruise.is_restricted %}
         <td>{{ cruise.year|safe }}</td>
         {% else %}
-        <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>
+        <td>{{ cruise.safe_start_date }} to <br /> {{ cruise.safe_end_date }}</td>
         {% endif %}
         <td>{% if cruise.expocode_link %}<ul><a  target="_blank" href="{{cruise.expocode_link}}"><li class="isdata">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</li></a></ul>{% endif %}</td>
         <td>{% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
@@ -140,7 +140,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Cruise: {{cruise.name}} ({{cruise.expocode}})</h4>
+            <h4 class="modal-title">Cruise: {{cruise.name_with_year}} ({{cruise.expocode}})</h4>
           </div>
           <div class="modal-body">
             <p><b>Line Name:</b> {{ cruise.name }}</p>

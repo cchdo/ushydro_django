@@ -53,7 +53,7 @@ class Cruise(models.Model):
             "started")
 
     def __unicode__(self):
-        return "%s (%s)" % (self.name, self.expocode)
+        return "%s (%s) (%s)" % (self.name, self.start_date.strftime("%Y"), self.expocode)
 
     def _sterile(self):
         if self.end_date > date.today():
@@ -133,9 +133,9 @@ class Cruise(models.Model):
 
     @property
     def name_with_year(self):
-        return "%s (%s)".format(
+        return "{0} ({1})".format(
                 self.name,
-             self.end_date.strftime("%Y")
+             self.start_date.strftime("%Y")
                 )
 
 
