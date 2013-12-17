@@ -55,7 +55,7 @@
         {% elif param == "cs" %}
         <th>Chief Scientist</th>
         {% else %}
-        <th> {{param.name|safe}}</th>
+        <th> {{param.name_with_year|safe}}</th>
         {% endif %}
         {% endfor %}
       </tr>

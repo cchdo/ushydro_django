@@ -131,6 +131,13 @@ class Cruise(models.Model):
     def parameters(self):
         return [p.parameter_id for p in self.programs]
 
+    @property
+    def name_with_year(self):
+        return "%s (%s)".format(
+                self.name,
+             self.end_date.strftime("%Y")
+                )
+
 
 class Parameter(OrderedModel):
     name = models.CharField(max_length=100)
