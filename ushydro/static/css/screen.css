@@ -155,7 +155,7 @@ ul.arrowlist_sub li {
     font-weight: normal;
 }
 
-arrowlist.smallspace li {
+ul.arrowlist.smallspace li {
   margin-bottom: 0;
 }
 /*-----------inline arrowlist----------------*/
