@@ -157,6 +157,7 @@ class Program(models.Model):
             (1, "Sampled, data not received"),
             (2, "Data avaliable as received"),
             (3, "Data avaliable in standard format"),
+            (4, "Not Data"),
             )
     data_status = models.IntegerField(choices=status_choices, default=1)
     note = models.TextField(null=True, blank=True)
