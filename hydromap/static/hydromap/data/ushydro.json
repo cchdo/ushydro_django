@@ -337,8 +337,8 @@
     "properties": {
       "title": "A16N",
       "line": "A16N",
-      "completed": [2003],
-      "pending": [2013],
+      "completed": [2003,2013],
+      "pending": [],
       "box":[330,58]
     }
   },
