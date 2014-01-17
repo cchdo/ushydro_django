@@ -20,6 +20,7 @@
   position: relative;
   top:-70px;
   visibility: hidden;
+  padding: 0;
 }
 .active {
   background-color: #7FC2EB;
