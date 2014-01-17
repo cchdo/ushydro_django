@@ -17,7 +17,9 @@
   }
 }
 .spied{
-  padding-top:70px;
+  position: relative;
+  top:-70px;
+  visibility: hidden;
 }
 .active {
   background-color: #7FC2EB;
