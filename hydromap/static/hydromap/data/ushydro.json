@@ -108,8 +108,8 @@
         ]
     },
     "properties": {
-      "title": "P2",
-      "line": "P2",
+      "title": "P02",
+      "line": "P02",
       "completed": [2004, 2013],
       "pending": [],
       "box": [160, 30]
@@ -153,8 +153,8 @@
         ]
     },
     "properties": {
-      "title": "P6",
-      "line": "P6",
+      "title": "P06",
+      "line": "P06",
       "completed": [2010],
       "pending": [],
       "box":[230,-32]
@@ -222,8 +222,8 @@
         ]
     },
     "properties": {
-      "title": "I6S",
-      "line": "I6S",
+      "title": "I06S",
+      "line": "I06S",
       "completed": [2008],
       "pending": [],
       "box":[35,-55]
@@ -245,8 +245,8 @@
         ]
     },
     "properties": {
-      "title": "I5",
-      "line": "I5",
+      "title": "I05",
+      "line": "I05",
       "completed": [2009],
       "pending": [],
       "box":[45,-35]
@@ -260,8 +260,8 @@
         ]
     },
     "properties": {
-      "title": "I7N",
-      "line": "I7N",
+      "title": "I07N",
+      "line": "I07N",
       "completed": [],
       "pending": [],
       "box":[63,0]
@@ -275,8 +275,8 @@
         ]
     },
     "properties": {
-      "title": "I9N",
-      "line": "I9N",
+      "title": "I09N",
+      "line": "I09N",
       "completed": [2007],
       "pending": [],
       "box":[105,-5]
@@ -290,8 +290,8 @@
         ]
     },
     "properties": {
-      "title": "I8S",
-      "line": "I8S",
+      "title": "I08S",
+      "line": "I08S",
       "completed": [2007],
       "pending": [],
       "box":[105,-50]
