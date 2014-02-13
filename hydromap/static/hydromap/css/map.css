@@ -44,6 +44,11 @@
   fill: #999;
   stroke: none;
 }
+.proposed{
+  color: #00f;
+  fill: #00f;
+  stroke: none;
+}
 g:hover .hydro{
   stroke: #FFA300;
 }

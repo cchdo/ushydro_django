@@ -1,3 +1,25 @@
+function calc_rect_height(d){
+  var base = 15;
+  com_l = (Math.ceil(d.properties.completed.length/2));
+  pend_l = (Math.ceil(d.properties.pending.length/2));
+  prop_l = (Math.ceil(d.properties.proposed.length/2));
+  return base + (com_l + pend_l + prop_l) * 12;
+}
+function pack_text(d, type){
+  base = -8;
+  com_l = (Math.ceil(d.properties.completed.length/2));
+  pend_l = (Math.ceil(d.properties.pending.length/2));
+  prop_l = (Math.ceil(d.properties.proposed.length/2));
+  if (type == "prop"){
+    return base + (com_l + pend_l + prop_l) * 12;
+  }
+  if (type == "pend"){
+    return base + (com_l + pend_l) * 12;
+  }
+  if (type == "com"){
+    return base + (com_l) * 12;
+  }
+}
 var width = 960,
     height = 650;
 
@@ -48,7 +70,7 @@ tracks.append("svg:rect")
   .attr("x", function(d){ return projection(d.properties.box)[0]-40})
   .attr("y", function(d){ return projection(d.properties.box)[1]-20})
   .attr("width", "75px")
-  .attr("height", "40px");
+  .attr("height", function(d){ return calc_rect_height(d)});
 tracks.append("svg:text")
   .attr("x", function(d){ return projection(d.properties.box)[0]})
   .attr("y", function(d){ return projection(d.properties.box)[1]-8})
@@ -57,21 +79,29 @@ tracks.append("svg:text")
   .text(function(d){return d.properties.title});
 tracks.append("svg:text")
   .attr("x", function(d){ return projection(d.properties.box)[0]})
-  .attr("y", function(d){ return projection(d.properties.box)[1]+4})
+  .attr("y", function(d){ return projection(d.properties.box)[1]+ pack_text(d, 'com')})
   .attr("text-anchor", "middle")
   .attr("font-size", "12px")
   .attr("class", "completed")
   .text(function(d){return d.properties.completed});
 tracks.append("svg:text")
   .attr("x", function(d){ return projection(d.properties.box)[0]})
-  .attr("y", function(d){ return projection(d.properties.box)[1]+16})
+  .attr("y", function(d){ return projection(d.properties.box)[1]+ pack_text(d, 'pend')})
   .attr("text-anchor", "middle")
   .attr("font-size", "12px")
   .attr("class", "pending")
   .text(function(d){return d.properties.pending});
+tracks.append("svg:text")
+  .attr("x", function(d){ return projection(d.properties.box)[0]})
+  .attr("y", function(d){ return projection(d.properties.box)[1]+ pack_text(d, "prop")})
+  .attr("text-anchor", "middle")
+  .attr("font-size", "12px")
+  .attr("class", "proposed")
+  .text(function(d){return d.properties.proposed});
 for (var c in collection.features){
   years = years.concat(collection.features[c].properties.completed);
   years = years.concat(collection.features[c].properties.pending);
+  years = years.concat(collection.features[c].properties.proposed);
 }
 $("#hydromap_year_end").text(d3.max(years));
 $("#hydromap_year_start").text(d3.min(years));
