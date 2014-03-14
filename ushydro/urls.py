@@ -12,13 +12,15 @@ urlpatterns = patterns('',
         # url(r'^$', 'ushydro.views.home', name='home'),
         # url(r'^ushydro/', include('ushydro.foo.urls')),
 
+        url(r'^s4p/?$', 'legacy.views.redirect_s4p'),
+
         # Uncomment the admin/doc line below to enable admin documentation:
         # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
         # Uncomment the next line to enable the admin:
-        #url(r'^bibliography/', include('bibliography.urls')),
-       # url(r'^hydrotable/', include('hydrotable.urls')),
         url(r'^admin/', include(admin.site.urls)),
+        #url(r'^bibliography/', include('bibliography.urls')),
+        #url(r'^hydrotable/', include('hydrotable.urls')),
         url(r'^cached.json', 'bibliography.views.cached_bibliography'),
         url(r'^load.json', 'bibliography.views.load_bibliography'),
         (r'^', include('cms.urls')),
