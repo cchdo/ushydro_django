@@ -1,0 +1,12 @@
+http://effbot.org/downloads/Imaging-1.1.7.tar.gz#egg=PIL
+Django==1.5.4
+imagestore
+MySQL-python
+cmsplugin-filer
+django-debug-toolbar
+django-missing
+django-ordered-model
+django-smart-load-tag
+djangocms-utils
+simple-translation
+Pyzotero
