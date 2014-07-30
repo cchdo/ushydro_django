@@ -13,6 +13,8 @@ def index(request):
     parameters = Parameter.objects.all()
     programs = Program.objects.all().prefetch_related('pi')
 
+    for cruise in cruises:
+        cruise.generate_program_dict()
     pi_names = {}
     for program in programs:
         pi_names[program.id] = program.pi.name
@@ -87,6 +89,8 @@ def build(request):
     cruises = Cruise.objects.all().prefetch_related('program_set',
     'chief_scientist', 'ship',)
 
+    for cruise in cruises:
+        cruise.generate_program_dict()
     custom_list = request.GET.getlist(u'p[]')
     custom_params = []
     for custom in custom_list:

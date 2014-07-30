@@ -3,7 +3,6 @@
 {% load sekizai_tags %}
 {% block hydrotable %}
 {% if cruises %}
-{% spaceless %}
 <div class="container" id="loading_message">
   <div class="well">The Hydrotable is being built, this should only take a few seconds (less than 5).
     <noscript><br />Our fancy table needs JavaScript to work well, if JavaScript is disabled or something went wrong, the table
@@ -30,35 +29,22 @@
   <table id="datatable" >
     <thead>
       <tr>
-        <th>Cruise</th>
-        {% if custom == "False" %}
+        <th>Cruise</th>{% if custom == "False" %}
         <th>Dates</th>
         <th>Expocode<br/>(CTD, Bottle Data)</th>
         <th>Ship</th>
         <th>Days</th>
         <th>Stations</th>
         <th>Ports</th>
-        <th>Chief Scientist</th>
-        {% endif %}
-        {% for param in parameters %}
-        {% if param == "dates" %}
-        <th>Dates</th>
-        {% elif param == "expocode" %}
-        <th>Expocode</th>
-        {% elif param == "ship" %}
-        <th>Ship</th>
-        {% elif param == "days" %}
-        <th>Days</th>
-        {% elif param == "stations" %}
-        <th>Stations</th>
-        {% elif param == "ports" %}
-        <th>Ports</th>
-        {% elif param == "cs" %}
-        <th>Chief Scientist</th>
-        {% else %}
-        <th> {{param.name|safe}}</th>
-        {% endif %}
-        {% endfor %}
+        <th>Chief Scientist</th>{% endif %}{% for param in parameters %}
+        {% if param == "dates" %}<th>Dates</th>
+        {% elif param == "expocode" %}<th>Expocode</th>
+        {% elif param == "ship" %}<th>Ship</th>
+        {% elif param == "days" %}<th>Days</th>
+        {% elif param == "stations" %}<th>Stations</th>
+        {% elif param == "ports" %}<th>Ports</th>
+        {% elif param == "cs" %}<th>Chief Scientist</th>
+        {% else %}<th> {{param.name|safe}}</th>{% endif %}{% endfor %}
       </tr>
     </thead>
     <tbody>
@@ -67,17 +53,15 @@
         <td>
           <a data-toggle="modal" href="#cruise{{cruise.id}}"><img height="20px" width="20px" src="/static/hydrotable/images/out_arrow.png"></a>
           {{ cruise.name_with_year|safe }}</td>{% if custom == "False" %}{% if cruise.is_restricted %}
-        <td>{{ cruise.year|safe }}</td>
-        {% else %}
-        <td>{{ cruise.safe_start_date }} to <br /> {{ cruise.safe_end_date }}</td>
-        {% endif %}
+        <td>{{ cruise.year|safe }}</td>{% else %}
+        <td>{{ cruise.safe_start_date }} to <br /> {{ cruise.safe_end_date }}</td>{% endif %}
         <td>{% if cruise.expocode_link %}<ul><a  target="_blank" href="{{cruise.expocode_link}}"><li class="isdata">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</li></a></ul>{% endif %}</td>
         <td>{% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>
         <td>{{ cruise.safe_days }}</td>
         <td>{{ cruise.stations }}</td>
         <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>
-        <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></td>{% endif %}{% for param in parameters %}{% if param == "dates" %}{% if cruise.is_restricted %}
-<td>{{ cruise.year|safe }}</td>{% else %}
+        <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></td>{% endif %}
+        {% for param in parameters %}{% if param == "dates" %}{% if cruise.is_restricted %}<td>{{ cruise.year|safe }}</td>{% else %}
 <td>{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}</td>{% endif %}{% elif param == "expocode" %}
 <td>{% if cruise.expocode_link %}<ul><a  target="_blank" href="{{cruise.expocode_link}}"><li class="isdata">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</li></a></ul>{% endif %}</td>{% elif param == "ship" %}
 <td>{% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</td>{% elif param == "days" %}
@@ -85,21 +69,11 @@
 <td>{{ cruise.stations }}</td>{% elif param == "ports" %}
 <td>{{ cruise.safe_start_port }} - {{ cruise.safe_end_port }}</td>{% elif param == "cs" %}
 <td><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></td>{% else %}
-<td>
-<ul>{% if param.id in cruise.parameters %}{% for program in cruise.program_set.all %}{% if program.parameter_id == param.id %}
-<li class="{% if program.is_data == 1 %}isdata {% endif %}{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">{% if program.url %}
-<a target="_blank" href="{{program.url}}">{% endif %}{{ pi_names|hash:program.id }}{% if program.url %}
-</a>{% endif %}{% if user.is_authenticated %}{% if program.note %}
-<br/>
-<span class="program_notes">Notes: {{ program.note }}</span>{% endif %}{% endif %}
-</li>{% endif %}{% endfor %}
-</ul>{% else %}-{% endif %}{% endif %}{% endfor %}
-</td>
-  </tr>{% endfor %}
+<td>{% if param.id in cruise.parameters %}<ul>{% for program in cruise.program_dict|hash:param.id %}<li class="{{ program.html_classes }}">{% if program.url %}<a target="_blank" href="{{program.url}}">{% endif %}{{ pi_names|hash:program.id }}{% if program.url %}</a>{% endif %}{% if user.is_authenticated %}{% if program.note %}<br/><span class="program_notes">Notes: {{ program.note }}</span>{% endif %}{% endif %}</li>{% endfor %}
+</ul>{% else %}-{% endif %}{% endif %}</td>{% endfor %}</tr>{% endfor %}
 </tbody>
       </table>
-    </div>
-    {% for cruise in cruises %}
+    </div>{% for cruise in cruises %}
     <div class="modal fade" id="cruise{{cruise.id}}">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -109,11 +83,7 @@
           </div>
           <div class="modal-body">
             <p><b>Line Name:</b> {{ cruise.name }}</p>
-              <p><b>Date:</b>{% if cruise.is_restricted %}
-            {{ cruise.year|safe }}
-            {% else %}
-            {{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}
-            {% endif %}
+              <p><b>Date:</b>{% if cruise.is_restricted %}{{ cruise.year|safe }}{% else %}{{ cruise.safe_start_date }} - {{ cruise.safe_end_date }}{% endif %}
             </p>
             <p><b>Expocode:</b> {% if cruise.expocode_link %}<a class="isdata" target="_blank" href="{{cruise.expocode_link}}">{% endif %}{{ cruise.safe_expocode }}{% if cruise.expocode_link %}</a>{% endif %}</p>
             <p><b>Ship:</b> {% if cruise.ship.url %}<a target="_blank" href="{{cruise.ship.url}}">{% endif %}{{ cruise.ship }}{% if cruise.ship.url %}</a>{% endif %}</p>
@@ -124,31 +94,17 @@
             <p><b>Chief Scientists:</b><ul>{% for cs in cruise.chief_scientist.all %}<li>{{cs.name}}</li>{% endfor %}</ul></p>
             <h4>Data Links and PIs:</h4>
                 <hr>
-                <table>
-                  {% for param in parameters %}
-                  {% if param.id in cruise.parameters %}
+                <table>{% for param in parameters %}{% if param.id in cruise.parameters %}
                   <tr>
                     <td class="modal_param_name"><b>{{param.name|safe}}:</b></td>
                     <td>
-                      <ul class="modal_param_list">
-                        {% for program in cruise.program_set.all %}
-                        {% if program.parameter_id == param.id %}
-                        <li class="{% if program.is_data == 1 %}isdata {% endif %}{% if program.data_status == 1 %}not_yet{% endif%}{% if program.data_status == 2 %}preliminary{% endif%}{% if program.data_status == 3 %}final{% endif%}">
-                        {% if program.url %}<a target="_blank" href="{{program.url}}">{% endif %}{{ pi_names|hash:program.id }}{% if program.url %}</a>{% endif %}
-                        
-                        {% if user.is_authenticated %}
-                         {% if program.note %}
+                      <ul class="modal_param_list">{% for program in cruise.program_dict|hash:param.id %}
+                        <li class="{{program.html_classes}}">{% if program.url %}<a target="_blank" href="{{program.url}}">{% endif %}{{ pi_names|hash:program.id }}{% if program.url %}</a>{% endif %}{% if user.is_authenticated %}{% if program.note %}
                          <br/>
-                         <span class="program_notes">Notes: {{ program.note }}</span>
-                         {% endif %}
-                         {% endif %}
-                        </li>
-                        {% endif %}
-                  {% endfor %}
+                         <span class="program_notes">Notes: {{ program.note }}</span>{% endif %}{% endif %}
+                        </li>{% endfor %}
                       </ul>
-                  </td></tr>
-                  {% endif %}
-                  {% endfor %}
+                  </td></tr>{% endif %}{% endfor %}
                 </table>
                 </div>
                 <div class="modal-footer">
@@ -158,7 +114,6 @@
   </div><!-- /.modal-dialog -->
 </div>
     {% endfor %}
-{% endspaceless %}
 {% endif %}
 {% endblock %}
 {% block js %}

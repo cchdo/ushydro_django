@@ -138,6 +138,14 @@ class Cruise(models.Model):
              self.start_date.strftime("%Y")
                 )
 
+    def generate_program_dict(self):
+        program_dict = {}
+        for program in self.programs:
+            if program.parameter_id not in program_dict:
+                program_dict[program.parameter_id] = []
+            program_dict[program.parameter_id].append(program)
+        self.program_dict = program_dict
+
 
 class Parameter(OrderedModel):
     name = models.CharField(max_length=100)
@@ -159,6 +167,12 @@ class Program(models.Model):
             (3, "Data avaliable in standard format"),
             (4, "Not Data"),
             )
+    status_class_dict = {
+            1:"not_yet",
+            2:"preliminary",
+            3:"final",
+            4:"",
+            }
     data_status = models.IntegerField(choices=status_choices, default=1)
     note = models.TextField(null=True, blank=True)
 
@@ -169,3 +183,11 @@ class Program(models.Model):
             self.note = None
 
         super(Program, self).save()
+
+    @property
+    def html_classes(self):
+        classes = []
+        if self.is_data:
+            classes.append("isdata")
+        classes.append(self.status_class_dict[self.data_status])
+        return " ".join(classes)
