@@ -19,8 +19,8 @@ def _get_json():
             'label': unit.get('title', ''),
             'year': unit.get('date', ''),
             'authors': '; '.join(
-                [', '.join([elem.get('lastName', None),
-                elem.get('firstName', None)]) for elem in\
+                [', '.join([elem.get('lastName', ""),
+                elem.get('firstName', "")]) for elem in\
                 unit.get('creators', {})]),
             'uri': unit.get('url', ''),
             'publisher': unit.get('publicationTitle', ''),
