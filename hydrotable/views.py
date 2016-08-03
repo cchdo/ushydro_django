@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
@@ -25,6 +27,91 @@ def index(request):
                 'custom': "False",
                 }
     return render(request, 'hydrotable/index.html', context)
+
+def make_cell_obj(text, href=None, status=None):
+    return {
+            "text": text,
+            "href": href,
+            "status": status
+            }
+
+def as_json(request):
+    cruises = Cruise.objects.all().prefetch_related('program_set',
+    'chief_scientist', 'ship',)
+
+    parameters = Parameter.objects.all()
+    programs = Program.objects.all().prefetch_related('pi')
+
+    hard_coded_cols = [
+            "Cruise",
+            "Dates",
+            "Expocode",
+            "Ship",
+            "Days",
+            "Stations",
+            "Ports",
+            "Chief Scientist",
+            ]
+
+    for cruise in cruises:
+        cruise.generate_program_dict()
+    pi_names = {}
+    for program in programs:
+        pi_names[program.id] = program.pi.name
+
+    params = []
+    param_map = {}
+    for param in parameters:
+        params.append(param.name)
+        param_map[param.name] = param.id
+
+    cols = hard_coded_cols + params
+
+    rows = []
+
+    for cruise in cruises:
+        row_obj = {}
+        for col in cols:
+            ## handle all the special cases..
+            if col == "Cruise":
+                row_obj[col] = [make_cell_obj(cruise.name_with_year)]
+            if col == "Dates":
+                row_obj[col] = [make_cell_obj(cruise.safe_start_date + " to " + cruise.safe_end_date)]
+            if col == "Ship":
+                row_obj[col] = [make_cell_obj(cruise.ship.name,
+                    href=cruise.ship.url
+                    )]
+            if col == "Expocode":
+                row_obj[col] = [make_cell_obj(cruise.safe_expocode,
+                        href=cruise.expocode_link)]
+            if col == "Days":
+                row_obj[col] = [make_cell_obj(cruise.safe_days)]
+            if col == "Stations":
+                row_obj[col] = [make_cell_obj(cruise.stations)]
+            if col == "Ports":
+                row_obj[col] = [make_cell_obj(cruise.safe_start_port + " - " + cruise.safe_end_port)]
+            if col == "Chief Scientist":
+                cells = [make_cell_obj(cs.name) for cs in
+                        cruise.chief_scientist.all()]
+                row_obj[col] = cells
+
+            # this is everyone else
+            if col in param_map and param_map[col] in cruise.parameters:
+                param_id = param_map[col]
+                cells = []
+                for program in cruise.program_dict[param_id]:
+                    cells.append(make_cell_obj(pi_names[program.id],
+                        status=program.html_classes, href=program.url))
+                row_obj[col] = cells
+
+
+
+        rows.append(row_obj)
+
+    response = HttpResponse(json.dumps({"columns":cols, "rows":rows}),
+            content_type="application/json")
+    response["Access-Control-Allow-Origin"] = "*"
+    return response
 
 def custom(request):
     parameters = Parameter.objects.all()
