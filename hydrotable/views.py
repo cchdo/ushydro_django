@@ -82,8 +82,12 @@ def as_json(request):
                     href=cruise.ship.url
                     )]
             if col == "Expocode":
+                status = None
+                if cruise.expocode_link:
+                    status = "isdata"
                 row_obj[col] = [make_cell_obj(cruise.safe_expocode,
-                        href=cruise.expocode_link)]
+                        href=cruise.expocode_link,
+                        status=status)]
             if col == "Days":
                 row_obj[col] = [make_cell_obj(cruise.safe_days)]
             if col == "Stations":
